@@ -7,6 +7,7 @@ public class Relacion {
 	private String gustos;
 	private String queBuscas;
 	private String descripcion;
+	private String nomUsu;
 
 	//
 	public Relacion() {
@@ -60,6 +61,14 @@ public class Relacion {
 
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
+	}
+
+	public String getNomUsu() {
+		return nomUsu;
+	}
+
+	public void setNomUsu(String nomUsu) {
+		this.nomUsu = nomUsu;
 	}
 
 }

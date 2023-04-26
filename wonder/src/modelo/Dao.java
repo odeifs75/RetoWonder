@@ -4,6 +4,7 @@ import clase.Cliente;
 import clase.Relacion;
 import clase.Usuario;
 
+
 public interface Dao {
 
 	public Usuario login(Usuario usu);
@@ -11,4 +12,8 @@ public interface Dao {
 	public void insertarUsuario(Cliente cli);
 	
 	public void insertarRelacion(Relacion rela);
+	
+	public Relacion cargarDatos();
+	
+	public void eliminarUsuario(Usuario usu);
 }

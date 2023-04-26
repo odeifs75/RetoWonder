@@ -27,6 +27,7 @@ import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.JPasswordField;
 import javax.swing.JSpinner;
+import javax.swing.JSeparator;
 
 public class Registro extends JDialog implements ActionListener {
 
@@ -42,13 +43,14 @@ public class Registro extends JDialog implements ActionListener {
 	private JComboBox comboGenero;
 	private JSpinner spinner;
 	private Dao dao;
+	private JSeparator separator;
 
 	/**
 	 * Create the dialog.
 	 */
 	public Registro(Dao dao) {
 		this.dao = dao;
-		setBounds(100, 100, 819, 829);
+		setBounds(100, 100, 441, 429);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(new Color(238, 83, 130));
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -58,12 +60,12 @@ public class Registro extends JDialog implements ActionListener {
 			JLabel lbl = new JLabel("Nombre de usuario");
 			lbl.setFont(new Font("Tahoma", Font.BOLD, 17));
 			lbl.setForeground(new Color(255, 255, 255));
-			lbl.setBounds(298, 60, 169, 38);
+			lbl.setBounds(10, 54, 169, 38);
 			contentPanel.add(lbl);
 		}
 		{
 			textFieldnomUsu = new JTextField();
-			textFieldnomUsu.setBounds(298, 109, 136, 26);
+			textFieldnomUsu.setBounds(10, 93, 136, 26);
 			contentPanel.add(textFieldnomUsu);
 			textFieldnomUsu.setColumns(10);
 		}
@@ -71,12 +73,12 @@ public class Registro extends JDialog implements ActionListener {
 			JLabel lblNewLabel_1 = new JLabel("Email");
 			lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 17));
 			lblNewLabel_1.setForeground(new Color(255, 255, 255));
-			lblNewLabel_1.setBounds(298, 146, 65, 38);
+			lblNewLabel_1.setBounds(227, 54, 65, 38);
 			contentPanel.add(lblNewLabel_1);
 		}
 		{
 			textFieldEmail = new JTextField();
-			textFieldEmail.setBounds(276, 186, 136, 26);
+			textFieldEmail.setBounds(227, 93, 136, 26);
 			contentPanel.add(textFieldEmail);
 			textFieldEmail.setColumns(10);
 		}
@@ -84,63 +86,69 @@ public class Registro extends JDialog implements ActionListener {
 			JLabel lblNewLabel_2 = new JLabel("Contrase\u00F1a");
 			lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 17));
 			lblNewLabel_2.setForeground(new Color(255, 255, 255));
-			lblNewLabel_2.setBounds(276, 225, 136, 26);
+			lblNewLabel_2.setBounds(10, 140, 136, 26);
 			contentPanel.add(lblNewLabel_2);
 		}
 		{
 			JLabel lblNewLabel_3 = new JLabel("Repetir Contrase\u00F1a");
 			lblNewLabel_3.setFont(new Font("Tahoma", Font.BOLD, 17));
 			lblNewLabel_3.setForeground(new Color(255, 255, 255));
-			lblNewLabel_3.setBounds(237, 293, 176, 26);
+			lblNewLabel_3.setBounds(227, 140, 176, 26);
 			contentPanel.add(lblNewLabel_3);
 		}
 		{
 			btnSiguiente = new JButton("Siguiente");
-			btnSiguiente.setBounds(0, 741, 129, 38);
+			btnSiguiente.setBounds(10, 341, 129, 38);
 			btnSiguiente.addActionListener(this);
 			contentPanel.add(btnSiguiente);
 		}
 		{
 			btnVolver = new JButton("Volver");
-			btnVolver.setBounds(313, 725, 129, 38);
+			
+			btnVolver.setBounds(286, 341, 129, 38);
 			contentPanel.add(btnVolver);
 		}
 		{
 			JLabel lblNewLabel_4 = new JLabel("Registro");
 			lblNewLabel_4.setFont(new Font("Tahoma", Font.BOLD, 23));
 			lblNewLabel_4.setForeground(new Color(255, 255, 255));
-			lblNewLabel_4.setBounds(329, 11, 246, 38);
+			lblNewLabel_4.setBounds(152, 0, 129, 38);
 			contentPanel.add(lblNewLabel_4);
 		}
 
 		passwordField = new JPasswordField();
-		passwordField.setBounds(276, 262, 136, 26);
+		passwordField.setBounds(10, 177, 136, 26);
 		contentPanel.add(passwordField);
 
 		passwordField_1 = new JPasswordField();
-		passwordField_1.setBounds(269, 362, 143, 26);
+		passwordField_1.setBounds(227, 177, 143, 26);
 		contentPanel.add(passwordField_1);
 		lblEdad = new JLabel("Edad");
 		lblEdad.setForeground(Color.WHITE);
 		lblEdad.setFont(new Font("Tahoma", Font.BOLD, 17));
-		lblEdad.setBounds(237, 529, 51, 21);
+		lblEdad.setBounds(227, 214, 51, 21);
 		contentPanel.add(lblEdad);
 
 		lblGenero = new JLabel("Genero");
 		lblGenero.setForeground(Color.WHITE);
 		lblGenero.setFont(new Font("Tahoma", Font.BOLD, 17));
-		lblGenero.setBounds(255, 464, 76, 21);
+		lblGenero.setBounds(10, 223, 76, 21);
 		contentPanel.add(lblGenero);
 
 		comboGenero = new JComboBox();
 		comboGenero.setModel(new DefaultComboBoxModel(new String[] { "Mujer", "Hombre", "Otro" }));
-		comboGenero.setBounds(237, 496, 183, 22);
+		comboGenero.setBounds(10, 259, 183, 22);
 		contentPanel.add(comboGenero);
 
 		spinner = new JSpinner();
 		spinner.setModel(new SpinnerNumberModel(18, null, 100, 1));
-		spinner.setBounds(212, 561, 76, 21);
+		spinner.setBounds(227, 260, 76, 21);
 		contentPanel.add(spinner);
+		{
+			separator = new JSeparator();
+			separator.setBounds(10, 41, 405, 2);
+			contentPanel.add(separator);
+		}
 	}
 	
 
@@ -190,11 +198,9 @@ public class Registro extends JDialog implements ActionListener {
 					
 					bd.insertarUsuario(cli);
 					
-					RegistroR re = new RegistroR(null);
+					RegistroR re = new RegistroR(dao);
 					re.setVisible(true);
 					this.dispose();
-
-					JOptionPane.showMessageDialog(this, "EL USUARIO SE HA REGISTRADO CORRECTAMENTE!");
 				} else {
 					JOptionPane.showMessageDialog(this, "ESTO NO ES UN EMAIL!");
 				}

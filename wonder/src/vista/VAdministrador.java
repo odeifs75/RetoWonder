@@ -7,26 +7,21 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import modelo.Dao;
+
 import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class VAdministrador extends JDialog {
+public class VAdministrador extends JDialog implements ActionListener {
 
 	private final JPanel contentPanel = new JPanel();
+	private JButton btnBaja;
+	private Dao dao;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			VAdministrador dialog = new VAdministrador();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 
 	/**
 	 * Create the dialog.
@@ -49,9 +44,10 @@ public class VAdministrador extends JDialog {
 			contentPanel.add(btnNewButton_1);
 		}
 		{
-			JButton btnNewButton_1 = new JButton("Baja");
-			btnNewButton_1.setBounds(155, 220, 192, 32);
-			contentPanel.add(btnNewButton_1);
+			btnBaja = new JButton("Baja");
+			btnBaja.setBounds(155, 220, 192, 32);
+			btnBaja.addActionListener(this);
+			contentPanel.add(btnBaja);
 		}
 		{
 			JButton btnNewButton_1 = new JButton("Cerrar Sesion");
@@ -65,6 +61,23 @@ public class VAdministrador extends JDialog {
 			lblNewLabel.setBounds(203, 22, 97, 46);
 			contentPanel.add(lblNewLabel);
 		}
+	}
+
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		if(e.getSource().equals(btnBaja)) {
+			baja();
+		}
+	}
+
+
+	private void baja() {
+		// TODO Auto-generated method stub
+		BajaUsuario bajaUsu=new BajaUsuario(dao);
+		bajaUsu.setVisible(true);
+		this.dispose();
 	}
 
 }

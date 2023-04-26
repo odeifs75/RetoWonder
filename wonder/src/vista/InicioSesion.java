@@ -123,7 +123,7 @@ public class InicioSesion extends JDialog implements ActionListener {
 			// comprobar si el usuario es correcto
 			if (usu != null ) {
 					if(usu instanceof Cliente) {
-						VCliente cli =new VCliente();
+						VCliente cli =new VCliente(dao);
 						cli.setVisible(true);
 						this.dispose();
 					}else{
