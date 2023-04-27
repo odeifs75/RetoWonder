@@ -28,12 +28,12 @@ public class DaoImplementacionBD implements Dao {
 	// Estos atributos son los necesarios para recoger los valores del fichero de
 	// configuracion
 	private ResourceBundle configFichero;
-
 	private String driverBD;
 	private String urlBD;
 	private String userBD;
 	private String passwordBD;
-	private String id;
+	
+	
 
 	// Sentencias sql
 	final String LOGIN = "select * from usuario where nomUsu=? and contraseina=?";
@@ -42,9 +42,10 @@ public class DaoImplementacionBD implements Dao {
 	final String MODIFICAR_USUARIO = "update cliente set orienSex=?, zodiaco=?, gustos=?, queBuscas=? where nomUsu=?";
 	final String INSERTAR_USUARIO = "insert into usuario (nomUsu, email, contraseina) values (?, ?, ?)";
 	final String INSERTAR_CLIENTE = "insert into cliente (nomUsuCli, edad, genero) values (?, ?, ?)";
-	final String INSERTAR_RELACION = "insert into relacion (codRela, orienSex, zodiaco, gustos, queBuscas, descrip, nomUsu) values (?, ?, ?, ?, ?, ?, ?)";
+	final String INSERTAR_RELACION = "insert into relacion (codRela, orienSex, zodiaco, gustos, queBuscas, descrip, nomUsuCli) values (?, ?, ?, ?, ?, ?, ?)";
 	final String CARGAR_RELACION = "select * from relacion where codRela=?";
 	final String ELIMINAR_USUARIO = "delete from usuario where nomUsu=?";
+	final String PILLAR_NOM="select codRela from relacion where NomUsuCli=?";
 
 	public DaoImplementacionBD() {
 		// TODO Auto-generated constructor stub
@@ -230,17 +231,25 @@ public class DaoImplementacionBD implements Dao {
 		return mather.find();
 	}
 
-	public Relacion cargarDatos() {
+	public Relacion cargarDatos(String nombreUsu) {
 
 		Relacion rela = new Relacion();
+		
 		
 
 		this.openConnection();
 		try {
-
+			stmt = con.prepareStatement(PILLAR_NOM);
+			stmt.setString(1, nombreUsu);
+			ResultSet rs=stmt.executeQuery();
+			
+			if(rs.next()) {
+				rela.setCodRela(rs.getString("codRela"));
+				
+			}
 			stmt = con.prepareStatement(CARGAR_RELACION);
-			stmt.setString(1, "01");
-			ResultSet rs = stmt.executeQuery();
+			stmt.setString(1, rela.getCodRela());
+			rs = stmt.executeQuery();
 
 			if (rs.next()) {
 				

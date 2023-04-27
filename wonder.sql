@@ -14,9 +14,9 @@ CREATE TABLE cliente (
     nomUsuCli VARCHAR(20) PRIMARY KEY,
     genero VARCHAR(10),
     edad INT,
-    FOREIGN KEY (nomUsuCli)
+   constraint fk_cliente FOREIGN KEY (nomUsuCli)
         REFERENCES usuario (nomUsu)
-    
+        on delete cascade on update cascade
 );
 CREATE TABLE relacion (
     codRela VARCHAR(20) PRIMARY KEY,
@@ -26,15 +26,17 @@ CREATE TABLE relacion (
     queBuscas VARCHAR(20) NOT NULL,
     descrip VARCHAR(100),
     nomUsuCli VARCHAR(20),
-    FOREIGN KEY (nomUsuCli)
+   constraint fk_relacion FOREIGN KEY (nomUsuCli)
         REFERENCES cliente (nomUsuCli)
+         on delete cascade on update cascade
 );
 
 CREATE TABLE administrador (
     nomUsuAd VARCHAR(20) PRIMARY KEY,
     salario float,
-    FOREIGN KEY (nomUsuAd)
+   constraint fk_admin FOREIGN KEY (nomUsuAd)
         REFERENCES usuario (nomUsu)
+         on delete cascade on update cascade
 );
 
 CREATE TABLE ubicacion (
@@ -48,10 +50,11 @@ CREATE TABLE vive (
     codubicacion INT,
     nomUsu VARCHAR(20),
     PRIMARY KEY (codUbicacion , nomUsu),
-    FOREIGN KEY (nomUsu)
+   constraint fk_vive FOREIGN KEY (nomUsu)
         REFERENCES usuario (nomUsu),
-    FOREIGN KEY (codUbicacion)
+   constraint fk_vive2 FOREIGN KEY (codUbicacion)
         REFERENCES ubicacion (codUbicacion)
+         on delete cascade on update cascade
 );
 
 CREATE TABLE actividad (
@@ -59,17 +62,18 @@ CREATE TABLE actividad (
     nomActividad VARCHAR(20),
     descripcion VARCHAR(50),
     fecha DATE,
-    nomUsuCli VARCHAR(20)
+    nomUsuCliCr VARCHAR(20)
 );
 
 CREATE TABLE crear (
     nomUsuCli VARCHAR(20),
     codactividad INT,
     PRIMARY KEY (codactividad , nomUsuCli),
-    FOREIGN KEY (nomUsuCli)
+  constraint fk_crear  FOREIGN KEY (nomUsuCli)
         REFERENCES cliente (nomUsuCli),
-    FOREIGN KEY (codactividad)
+   constraint fk_crear2 FOREIGN KEY (codactividad)
         REFERENCES actividad (codactividad)
+         on delete cascade on update cascade
     
 );
 
@@ -77,24 +81,23 @@ CREATE TABLE inscribir (
     nomUsuCli VARCHAR(20),
     codactividad INT,
     PRIMARY KEY (codactividad , nomUsuCli),
-    FOREIGN KEY (nomUsuCli)
+   constraint fk_inscribir FOREIGN KEY (nomUsuCli)
         REFERENCES cliente (nomUsuCli),
-    FOREIGN KEY (codactividad)
+    constraint fk_inscribir2 FOREIGN KEY (codactividad)
         REFERENCES actividad (codactividad)
+         on delete cascade on update cascade
     
 );
-
-
-
 
 CREATE TABLE gestion (
     nomUsuAd VARCHAR(50),
     nomUsuCli VARCHAR(50),
     PRIMARY KEY (nomUsuAd , nomUsuCli),
-    FOREIGN KEY (nomUsuCli)
+   constraint fk_gestion FOREIGN KEY (nomUsuCli)
         REFERENCES cliente (nomUsuCli),
-    FOREIGN KEY (nomUsuAd)
+   constraint fk_gestion2 FOREIGN KEY (nomUsuAd)
         REFERENCES administrador (nomUsuAd)
+         on delete cascade on update cascade
 );
 
 insert into usuario values("alvaro","alvaro@wonder.com","wonder"),

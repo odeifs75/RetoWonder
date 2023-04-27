@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import clase.Relacion;
+import clase.Usuario;
 import modelo.Dao;
 import modelo.DaoImplementacionBD;
 
@@ -45,14 +46,16 @@ public class VCliente extends JDialog implements ActionListener {
 	private JLabel lblDescrip;
 	private JTextField textDescrip;
 	private JButton btnrefresh;
-
+	private Usuario usu;
 	
 
 	/**
 	 * Create the dialog.
+	 * @param usu 
 	 */
-	public VCliente(Dao dao) {
+	public VCliente(Dao dao, Usuario usu) {
 		this.dao=dao;
+		this.usu = usu;
 		setBounds(100, 100, 480, 573);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(new Color(238, 83, 130));
@@ -176,8 +179,9 @@ public class VCliente extends JDialog implements ActionListener {
 	}
 
 	public void cargar() {
+		
 		DaoImplementacionBD bd = new DaoImplementacionBD();
-		Relacion rela =	bd.cargarDatos();
+		Relacion rela =	bd.cargarDatos(usu.getNomUsu());
 		
 		textNomUsu.setText(rela.getNomUsu());
 		textOrientacion.setText(rela.getOrienSex());

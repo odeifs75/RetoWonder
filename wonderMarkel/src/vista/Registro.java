@@ -198,7 +198,7 @@ public class Registro extends JDialog implements ActionListener {
 					
 					bd.insertarUsuario(cli);
 					
-					RegistroR re = new RegistroR(dao);
+					RegistroR re = new RegistroR(dao, usu);
 					re.setVisible(true);
 					this.dispose();
 				} else {

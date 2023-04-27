@@ -13,7 +13,7 @@ public interface Dao {
 	
 	public void insertarRelacion(Relacion rela);
 	
-	public Relacion cargarDatos();
+	public Relacion cargarDatos(String nomUsu);
 	
 	public void eliminarUsuario(Usuario usu);
 }

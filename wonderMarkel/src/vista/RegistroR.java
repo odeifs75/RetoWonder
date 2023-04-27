@@ -51,7 +51,7 @@ public class RegistroR extends JDialog implements ActionListener {
 	/**
 	 * Create the dialog.
 	 */
-	public RegistroR(Dao dao) {
+	public RegistroR(Dao dao, Usuario usu) {
 		this.dao = dao;
 		setBounds(100, 100, 475, 539);
 		getContentPane().setLayout(new BorderLayout());
@@ -171,7 +171,7 @@ public class RegistroR extends JDialog implements ActionListener {
 	public void relacion() {
 		DaoImplementacionBD bd = new DaoImplementacionBD();
 			
-
+				
 				Relacion rela = new Relacion();
 				// Recoger los datos de la relacion
 				rela.setCodRela(textFieldcodrela.getText());
