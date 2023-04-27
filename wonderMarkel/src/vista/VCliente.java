@@ -191,4 +191,6 @@ public class VCliente extends JDialog implements ActionListener {
 		textDescrip.setText(rela.getDescripcion());
 		
 	}
-}
+	
+	//COMENTARIO DE PRUEBA SSH
+	}
