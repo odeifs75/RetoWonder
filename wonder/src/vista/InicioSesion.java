@@ -78,13 +78,13 @@ public class InicioSesion extends JDialog implements ActionListener {
 		}
 		{
 			btnAceptar = new JButton("Aceptar");
-			btnAceptar.setBounds(33, 399, 129, 38);
+			btnAceptar.setBounds(325, 399, 129, 38);
 			btnAceptar.addActionListener(this);
 			getContentPane().add(btnAceptar);
 		}
 		{
 			btnVolver = new JButton("Volver");
-			btnVolver.setBounds(283, 399, 129, 38);
+			btnVolver.setBounds(10, 399, 129, 38);
 			btnVolver.addActionListener(this);
 			getContentPane().add(btnVolver);
 		}
@@ -127,7 +127,7 @@ public class InicioSesion extends JDialog implements ActionListener {
 						cli.setVisible(true);
 						this.dispose();
 					}else{
-						VAdministrador admin=new VAdministrador();
+						VAdministrador admin=new VAdministrador(dao);
 						admin.setVisible(true);
 						this.dispose();
 					}

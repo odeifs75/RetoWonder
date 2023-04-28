@@ -46,13 +46,14 @@ public class RegistroR extends JDialog implements ActionListener {
 	private JLabel lblDescripcion;
 	private JTextField textField;
 	private Dao dao;
-	private JTextField textFieldcodrela;
+	private Usuario usu;
 
 	/**
 	 * Create the dialog.
 	 */
 	public RegistroR(Dao dao, Usuario usu) {
 		this.dao = dao;
+		this.usu=usu;
 		setBounds(100, 100, 475, 539);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(new Color(238, 83, 130));
@@ -61,14 +62,14 @@ public class RegistroR extends JDialog implements ActionListener {
 		contentPanel.setLayout(null);
 		{
 			btnAceptar = new JButton("Aceptar");
-			btnAceptar.setBounds(10, 451, 129, 38);
+			btnAceptar.setBounds(320, 451, 129, 38);
 			btnAceptar.addActionListener(this);
 			contentPanel.add(btnAceptar);
 		}
 		{
 			btnVolver = new JButton("Volver");
 			
-			btnVolver.setBounds(309, 451, 129, 38);
+			btnVolver.setBounds(10, 451, 129, 38);
 			contentPanel.add(btnVolver);
 		}
 		{
@@ -137,17 +138,6 @@ public class RegistroR extends JDialog implements ActionListener {
 		JSeparator separator = new JSeparator();
 		separator.setBounds(10, 38, 448, 2);
 		contentPanel.add(separator);
-		
-		JLabel lblCodigoDe = new JLabel(" Codigo de relacion");
-		lblCodigoDe.setForeground(Color.WHITE);
-		lblCodigoDe.setFont(new Font("Tahoma", Font.BOLD, 17));
-		lblCodigoDe.setBounds(148, 60, 183, 21);
-		contentPanel.add(lblCodigoDe);
-		
-		textFieldcodrela = new JTextField();
-		textFieldcodrela.setBounds(148, 92, 160, 20);
-		contentPanel.add(textFieldcodrela);
-		textFieldcodrela.setColumns(10);
 	}
 
 	@Override
@@ -174,12 +164,12 @@ public class RegistroR extends JDialog implements ActionListener {
 				
 				Relacion rela = new Relacion();
 				// Recoger los datos de la relacion
-				rela.setCodRela(textFieldcodrela.getText());
 				rela.setZodiaco(comboZodiaco.getSelectedItem().toString());
 				rela.setOrienSex(comboOrientacion.getSelectedItem().toString());
 				rela.setGustos(comboGustos.getSelectedItem().toString());
 				rela.setQueBuscas(comboQueBuscas.getSelectedItem().toString());
 				rela.setDescripcion(textField.getText());
+				rela.setNomUsu(usu.getNomUsu());
 				bd.insertarRelacion(rela);
 				InicioSesion re = new InicioSesion(dao);
 				re.setVisible(true);

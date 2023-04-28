@@ -26,7 +26,8 @@ public class VAdministrador extends JDialog implements ActionListener {
 	/**
 	 * Create the dialog.
 	 */
-	public VAdministrador() {
+	public VAdministrador(Dao dao) {
+		this.dao=dao;
 		setBounds(100, 100, 480, 487);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(new Color(238, 83, 130));

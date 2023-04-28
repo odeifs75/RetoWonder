@@ -7,6 +7,12 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import clase.Relacion;
+
+import modelo.Dao;
+import modelo.DaoImplementacionBD;
+
 import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -17,8 +23,10 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JSpinner;
 import javax.swing.JComboBox;
+import javax.swing.AbstractButton;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JSeparator;
+import javax.swing.JTextField;
 
 public class Modificar extends JDialog implements ActionListener {
 
@@ -28,13 +36,22 @@ public class Modificar extends JDialog implements ActionListener {
 	private JLabel lblOrientacionSexual;
 	private JLabel lblNewLabel;
 	private JButton btnAceptar;
+	private Dao dao;
+	private JComboBox comboGustos;
+	private JComboBox comboQueBuscas;
+	private JLabel lblGustos;
+	private JLabel lblQueBuscas;
+	private JLabel lblZodiaco;
+	private JLabel lblNombreDeUsuario;
+	private JTextField textField;
 
 	
 
 	/**
 	 * Create the dialog.
 	 */
-	public Modificar() {
+	public Modificar(Dao dao) {
+		this.dao=dao;
 		setBounds(100, 100, 480, 487);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(new Color(238, 83, 130));
@@ -45,12 +62,13 @@ public class Modificar extends JDialog implements ActionListener {
 		lblOrientacionSexual = new JLabel("Orientacion Sexual");
 		lblOrientacionSexual.setForeground(Color.WHITE);
 		lblOrientacionSexual.setFont(new Font("Tahoma", Font.BOLD, 17));
-		lblOrientacionSexual.setBounds(140, 55, 183, 21);
+		lblOrientacionSexual.setBounds(140, 123, 183, 21);
 		contentPanel.add(lblOrientacionSexual);
 		
 		comboOrientacion = new JComboBox();
 		comboOrientacion.setModel(new DefaultComboBoxModel(new String[] {"Heterosexual", "Homosexual", "Transexual", "Pansexual", "Asexual", "Bisexual", ""}));
-		comboOrientacion.setBounds(140, 87, 183, 22);
+		comboOrientacion.setSelectedIndex(-1);
+		comboOrientacion.setBounds(140, 155, 183, 22);
 		contentPanel.add(comboOrientacion);
 		
 		btnCancelar = new JButton("Cancelar");
@@ -67,40 +85,59 @@ public class Modificar extends JDialog implements ActionListener {
 		separator.setBounds(10, 43, 444, 1);
 		contentPanel.add(separator);
 		
-		JLabel lblZodiaco = new JLabel("Zodiaco");
+		lblZodiaco = new JLabel("Zodiaco");
 		lblZodiaco.setForeground(Color.WHITE);
 		lblZodiaco.setFont(new Font("Tahoma", Font.BOLD, 17));
-		lblZodiaco.setBounds(140, 120, 86, 21);
+		lblZodiaco.setBounds(140, 188, 86, 21);
 		contentPanel.add(lblZodiaco);
 		
-		JLabel lblGustos = new JLabel("Gustos");
+		lblGustos = new JLabel("Gustos");
 		lblGustos.setForeground(Color.WHITE);
+		
 		lblGustos.setFont(new Font("Tahoma", Font.BOLD, 17));
-		lblGustos.setBounds(140, 185, 76, 21);
+		lblGustos.setBounds(140, 253, 76, 21);
 		contentPanel.add(lblGustos);
 		
-		JComboBox comboGustos = new JComboBox();
-		comboGustos.setBounds(140, 217, 183, 22);
+		comboGustos = new JComboBox();
+		comboGustos.setModel(new DefaultComboBoxModel(new String[] {"Videojuegos", "Fiesta", "Cine"}));
+		comboGustos.setSelectedIndex(-1);
+		comboGustos.setBounds(140, 285, 183, 22);
 		contentPanel.add(comboGustos);
 		
-		JLabel lblQueBuscas = new JLabel("Que buscas");
+		lblQueBuscas = new JLabel("Que buscas");
 		lblQueBuscas.setForeground(Color.WHITE);
+		
 		lblQueBuscas.setFont(new Font("Tahoma", Font.BOLD, 17));
-		lblQueBuscas.setBounds(140, 250, 183, 21);
+		lblQueBuscas.setBounds(140, 318, 183, 21);
 		contentPanel.add(lblQueBuscas);
 		
-		JComboBox comboQueBuscas = new JComboBox();
-		comboQueBuscas.setBounds(140, 282, 183, 22);
+		comboQueBuscas = new JComboBox();
+		comboQueBuscas.setBounds(140, 350, 183, 22);
+		comboQueBuscas.setModel(new DefaultComboBoxModel(new String[] {"Una Relacion", "Amistad"}));
+		comboQueBuscas.setSelectedIndex(-1);
 		contentPanel.add(comboQueBuscas);
 		
 		JComboBox comboZodiaco = new JComboBox();
 		comboZodiaco.setModel(new DefaultComboBoxModel(new String[] {"Aries", "Tauro", "Geminis", "Cancer", "Leo", "Virgo", "Libra", "Escorpio", "Sagitario", "Capricornio", "Acuario", "Piscis"}));
-		comboZodiaco.setBounds(140, 152, 183, 22);
+		comboZodiaco.setBounds(140, 220, 183, 22);
+		comboZodiaco.setSelectedIndex(-1);
 		contentPanel.add(comboZodiaco);
 		
-		btnAceptar = new JButton("Cancelar");
+		btnAceptar = new JButton("Aceptar");
+	
 		btnAceptar.setBounds(294, 399, 129, 38);
 		contentPanel.add(btnAceptar);
+		
+		lblNombreDeUsuario = new JLabel("Nombre de usuario");
+		lblNombreDeUsuario.setForeground(Color.WHITE);
+		lblNombreDeUsuario.setFont(new Font("Tahoma", Font.BOLD, 17));
+		lblNombreDeUsuario.setBounds(140, 55, 183, 21);
+		contentPanel.add(lblNombreDeUsuario);
+		
+		textField = new JTextField();
+		textField.setBounds(140, 87, 183, 20);
+		contentPanel.add(textField);
+		textField.setColumns(10);
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -111,8 +148,12 @@ public class Modificar extends JDialog implements ActionListener {
 	}
 	private void btncancelar() {
 		// TODO Auto-generated method stub
-		ModificarPerfil modiPer=new ModificarPerfil();
+		ModificarPerfil modiPer=new ModificarPerfil(dao);
 		modiPer.setVisible(true);
 		this.dispose();
 	}
+	
+	
+	
+	
 }

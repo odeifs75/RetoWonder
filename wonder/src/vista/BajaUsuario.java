@@ -35,6 +35,7 @@ public class BajaUsuario extends JDialog implements ActionListener {
 	 * Create the frame.
 	 */
 	public BajaUsuario(Dao dao) {
+		this.dao=dao;
 		setBounds(100, 100, 455, 367);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(238, 83, 130));
@@ -70,13 +71,13 @@ public class BajaUsuario extends JDialog implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getSource().equals(btnBorrar)) {
-			borrarUsuario(dao);
+			borrarUsuario();
 			
 		}
 	}
 
 
-	private void borrarUsuario(Dao dao) {
+	private void borrarUsuario() {
 		// TODO Auto-generated method stub
 		Usuario  usu =new Usuario();
 		

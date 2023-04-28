@@ -42,10 +42,10 @@ public class DaoImplementacionBD implements Dao {
 	final String MODIFICAR_USUARIO = "update cliente set orienSex=?, zodiaco=?, gustos=?, queBuscas=? where nomUsu=?";
 	final String INSERTAR_USUARIO = "insert into usuario (nomUsu, email, contraseina) values (?, ?, ?)";
 	final String INSERTAR_CLIENTE = "insert into cliente (nomUsuCli, edad, genero) values (?, ?, ?)";
-	final String INSERTAR_RELACION = "insert into relacion (codRela, orienSex, zodiaco, gustos, queBuscas, descrip, nomUsuCli) values (?, ?, ?, ?, ?, ?, ?)";
+	final String INSERTAR_RELACION = "insert into relacion (orienSex, zodiaco, gustos, queBuscas, descrip, nomUsuCli) values (?, ?, ?, ?, ?, ?)";
 	final String CARGAR_RELACION = "select * from relacion where codRela=?";
 	final String ELIMINAR_USUARIO = "delete from usuario where nomUsu=?";
-	final String PILLAR_NOM="select codRela from relacion where NomUsuCli=?";
+	final String PILLAR_NOM = "select codRela from relacion where NomUsuCli=?";
 
 	public DaoImplementacionBD() {
 		// TODO Auto-generated constructor stub
@@ -192,13 +192,12 @@ public class DaoImplementacionBD implements Dao {
 			stmt = con.prepareStatement(INSERTAR_RELACION);
 
 			// Posicionamos cada valor para insertarlo en la base de datos
-			stmt.setString(1, rela.getCodRela());
-			stmt.setString(2, rela.getOrienSex());
-			stmt.setString(3, rela.getZodiaco());
-			stmt.setString(4, rela.getGustos());
-			stmt.setString(5, rela.getQueBuscas());
-			stmt.setString(6, rela.getDescripcion());
-			stmt.setString(7, rela.getNomUsu());
+			stmt.setString(1, rela.getOrienSex());
+			stmt.setString(2, rela.getZodiaco());
+			stmt.setString(3, rela.getGustos());
+			stmt.setString(4, rela.getQueBuscas());
+			stmt.setString(5, rela.getDescripcion());
+			stmt.setString(6, rela.getNomUsu());
 			rs = stmt.executeUpdate();
 
 		} catch (SQLException e) {

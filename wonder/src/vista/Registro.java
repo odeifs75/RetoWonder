@@ -104,7 +104,7 @@ public class Registro extends JDialog implements ActionListener {
 		}
 		{
 			btnVolver = new JButton("Volver");
-			
+			btnVolver.addActionListener(this);
 			btnVolver.setBounds(286, 341, 129, 38);
 			contentPanel.add(btnVolver);
 		}
@@ -198,7 +198,7 @@ public class Registro extends JDialog implements ActionListener {
 					
 					bd.insertarUsuario(cli);
 					
-					RegistroR re = new RegistroR(dao, usu);
+					RegistroR re = new RegistroR(dao, cli);
 					re.setVisible(true);
 					this.dispose();
 				} else {

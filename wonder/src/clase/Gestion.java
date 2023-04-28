@@ -1,7 +1,5 @@
 package clase;
 
-import java.time.LocalDate;
-
 public class Gestion {
 
 	private String nomUsuCli;
