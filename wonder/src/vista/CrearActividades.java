@@ -21,6 +21,7 @@ import com.toedter.calendar.JCalendar;
 
 import clase.Actividad;
 import clase.Cliente;
+import clase.Usuario;
 import modelo.Dao;
 import modelo.DaoImplementacionBD;
 import com.toedter.calendar.JDateChooser;
@@ -37,14 +38,16 @@ public class CrearActividades extends JDialog implements ActionListener {
 	private JButton btnCancelar;
 	private Dao dao;
 	private JDateChooser dateChooser;
+	private Usuario usu;
 
 	
 
 	/**
 	 * Create the dialog.
 	 */
-	public CrearActividades(Dao dao) {
+	public CrearActividades(Dao dao, Usuario usu) {
 		this.dao=dao;
+		this.usu=usu;
 		setBounds(100, 100, 514, 581);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(new Color(238, 83, 130));
@@ -109,12 +112,12 @@ public class CrearActividades extends JDialog implements ActionListener {
 	private void crearActividad() {
 		// TODO Auto-generated method stub
 		DaoImplementacionBD bd=new DaoImplementacionBD();
-		
-		Actividad acti = new Actividad();
+		Actividad acti=new Actividad();
 		
 		acti.setNomActividad(textFieldNombre.getText());
 		acti.setFecha(dateChooser.getDate().toLocaleString());
 		acti.setDescripcion(textFieldDescripcion.getText());
+		acti.setnomUsuCliCr(usu.getNomUsu());
 		bd.crearActividad(acti);
 		
 		JOptionPane.showMessageDialog(this, "Se ha creado la actividad");

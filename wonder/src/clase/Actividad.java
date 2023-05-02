@@ -10,7 +10,7 @@ public class Actividad {
 	private String nomActividad;
 	private String descripcion;
 	private String fecha;
-	private String nomUsu;
+	private String nomUsuCliCr;
 	//
 	public Actividad() {
 		super();
@@ -42,10 +42,10 @@ public class Actividad {
 	public void setFecha(String fecha) {
 		this.fecha = fecha;
 	}
-	public String getNomUsu() {
-		return nomUsu;
+	public String getnomUsuCliCr() {
+		return nomUsuCliCr;
 	}
-	public void setNomUsu(String nomUsu) {
-		this.nomUsu = nomUsu;
+	public void setnomUsuCliCr(String nomUsuCliCr) {
+		this.nomUsuCliCr = nomUsuCliCr;
 	}
 }

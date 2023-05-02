@@ -41,6 +41,7 @@ public class VActividad extends JDialog implements ActionListener {
 	 */
 	public VActividad(Dao dao, Usuario usu) {
 		this.dao=dao;
+		this.usu=usu;
 		getContentPane().setBackground(new Color(238, 83, 130));
 		setBounds(100, 100, 487, 555);
 		getContentPane().setLayout(null);
@@ -71,9 +72,10 @@ public class VActividad extends JDialog implements ActionListener {
 		getContentPane().add(btnVolver);
 		
 		btnlupa = new JButton("");
+		btnlupa.setBorder(null);
 		btnlupa.setBackground(new Color(238, 83, 130));
 		btnlupa.setForeground(Color.WHITE);
-		btnlupa.setIcon(new ImageIcon("RetoWonder\\wonder\\imagenes\\lupa.png"));
+		btnlupa.setIcon(new ImageIcon(".\\.\\imagenes\\lupa.png"));
 		btnlupa.setBounds(10, 457, 72, 48);
 		getContentPane().add(btnlupa);
 		
@@ -120,7 +122,7 @@ public class VActividad extends JDialog implements ActionListener {
 
 	private void crear() {
 		// TODO Auto-generated method stub
-		CrearActividades crearActi=new CrearActividades(dao);
+		CrearActividades crearActi=new CrearActividades(dao, usu);
 		crearActi.setVisible(true);
 		this.dispose();
 	}

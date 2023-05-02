@@ -10,9 +10,6 @@ public class Cliente extends Usuario{
 	
 	public Cliente() {
 		super();
-	
-		
-		
 	}
 	
 	public String getEdad() {

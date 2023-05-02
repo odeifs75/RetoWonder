@@ -49,7 +49,7 @@ public class DaoImplementacionBD implements Dao {
 	final String CARGAR_RELACION = "select * from relacion where codRela=?";
 	final String ELIMINAR_USUARIO = "delete from usuario where nomUsu=?";
 	final String PILLAR_NOM = "select codRela from relacion where NomUsuCli=?";
-	final String CREAR_ACTIVIDAD = "insert into actividad (nomActividad, descripcion, fecha) values (?, ?, ?)";
+	final String CREAR_ACTIVIDAD = "insert into actividad (nomActividad, descripcion, fecha, nomUsuCliCr) values (?, ?, ?, ?)";
 
 	public DaoImplementacionBD() {
 		// TODO Auto-generated constructor stub
@@ -298,6 +298,7 @@ public class DaoImplementacionBD implements Dao {
 	@Override
 	public void crearActividad(Actividad acti) {
 		// TODO Auto-generated method stub
+		
 		this.openConnection();
 		
 		
@@ -306,6 +307,7 @@ public class DaoImplementacionBD implements Dao {
 			stmt.setString(1, acti.getNomActividad());
 			stmt.setString(2, acti.getDescripcion());
 			stmt.setString(3, acti.getFecha());
+			stmt.setString(4, acti.getnomUsuCliCr());
 			
 			stmt.executeUpdate();
 		} catch (SQLException e) {
@@ -322,36 +324,7 @@ public class DaoImplementacionBD implements Dao {
 	}
 
 	
-//	public void insertarUsuario(Cliente cli) {
-//
-//		this.openConnection();
-//		int rs;
-//		try {
-//
-//			stmt = con.prepareStatement(INSERTAR_USUARIO); // Cargamos el insert de usuario con el stmt
-//			// Posicionamos cada valor para insertarlo en la base de datos
-//			stmt.setString(1, cli.getNomUsu());
-//			stmt.setString(2, cli.getEmail());
-//			stmt.setString(3, cli.getContrasena());
-//			rs = stmt.executeUpdate();
-//
-//			stmt = con.prepareStatement(INSERTAR_CLIENTE);
-//			stmt.setString(1, cli.getNomUsu());
-//			stmt.setString(2, cli.getEdad());
-//			stmt.setString(3, cli.getGenero());
-//			rs = stmt.executeUpdate();
-//
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}
-//		try {
-//			this.closeConnection();
-//
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//	}
+
 	
 
 }

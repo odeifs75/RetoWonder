@@ -19,4 +19,5 @@ public interface Dao {
 	public void eliminarUsuario(Usuario usu);
 	
 	public void crearActividad(Actividad acti);
+
 }
