@@ -4,6 +4,12 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 
+/**
+ * @author june
+ * @author markel
+ * @author odei
+ * @author alvaro
+ */
 public class Cliente extends Usuario{
 	// ATRIBUTOS
 	private LocalDate fechaNac;

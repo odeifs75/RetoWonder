@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import clase.Relacion;
-
+import clase.Usuario;
 import modelo.Dao;
 import modelo.DaoImplementacionBD;
 
@@ -18,7 +18,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -44,16 +43,18 @@ public class Modificar extends JDialog implements ActionListener {
 	private JLabel lblQueBuscas;
 	private JLabel lblZodiaco;
 	private JLabel lblNombreDeUsuario;
-	private JTextField textField;
+	private JTextField textNomUsu;
+	private Relacion rela;
+	private JComboBox comboZodiaco;
 
 	
 
 	/**
 	 * Create the dialog.
 	 */
-	public Modificar(Dao dao) {
+	public Modificar(Dao dao, Relacion rela) {
+		this.rela=rela;
 		this.dao=dao;
-		setIconImage(Toolkit.getDefaultToolkit().getImage(".\\.\\imagenes\\logo.png"));
 		setBounds(100, 100, 480, 487);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(new Color(238, 83, 130));
@@ -69,7 +70,6 @@ public class Modificar extends JDialog implements ActionListener {
 		
 		comboOrientacion = new JComboBox();
 		comboOrientacion.setModel(new DefaultComboBoxModel(new String[] {"Heterosexual", "Homosexual", "Transexual", "Pansexual", "Asexual", "Bisexual", ""}));
-		comboOrientacion.setSelectedIndex(-1);
 		comboOrientacion.setBounds(140, 155, 183, 22);
 		contentPanel.add(comboOrientacion);
 		
@@ -102,7 +102,6 @@ public class Modificar extends JDialog implements ActionListener {
 		
 		comboGustos = new JComboBox();
 		comboGustos.setModel(new DefaultComboBoxModel(new String[] {"Videojuegos", "Fiesta", "Cine"}));
-		comboGustos.setSelectedIndex(-1);
 		comboGustos.setBounds(140, 285, 183, 22);
 		contentPanel.add(comboGustos);
 		
@@ -116,17 +115,17 @@ public class Modificar extends JDialog implements ActionListener {
 		comboQueBuscas = new JComboBox();
 		comboQueBuscas.setBounds(140, 350, 183, 22);
 		comboQueBuscas.setModel(new DefaultComboBoxModel(new String[] {"Una Relacion", "Amistad"}));
-		comboQueBuscas.setSelectedIndex(-1);
+		
 		contentPanel.add(comboQueBuscas);
 		
-		JComboBox comboZodiaco = new JComboBox();
+		comboZodiaco = new JComboBox();
 		comboZodiaco.setModel(new DefaultComboBoxModel(new String[] {"Aries", "Tauro", "Geminis", "Cancer", "Leo", "Virgo", "Libra", "Escorpio", "Sagitario", "Capricornio", "Acuario", "Piscis"}));
 		comboZodiaco.setBounds(140, 220, 183, 22);
-		comboZodiaco.setSelectedIndex(-1);
+		
 		contentPanel.add(comboZodiaco);
 		
 		btnAceptar = new JButton("Aceptar");
-	
+		btnAceptar.addActionListener(this);
 		btnAceptar.setBounds(294, 399, 129, 38);
 		contentPanel.add(btnAceptar);
 		
@@ -136,26 +135,55 @@ public class Modificar extends JDialog implements ActionListener {
 		lblNombreDeUsuario.setBounds(140, 55, 183, 21);
 		contentPanel.add(lblNombreDeUsuario);
 		
-		textField = new JTextField();
-		textField.setBounds(140, 87, 183, 20);
-		contentPanel.add(textField);
-		textField.setColumns(10);
+		textNomUsu = new JTextField();
+		textNomUsu.setBounds(140, 87, 183, 20);
+		contentPanel.add(textNomUsu);
+		textNomUsu.setColumns(10);
+		cargar();
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		if(e.getSource().equals(btnCancelar)) {
+		if(e.getSource().equals(btnAceptar)) {
+			aceptar();
+		}else if(e.getSource().equals(btnCancelar)) {
 			btncancelar();
 		}
 	}
+	private void aceptar() {
+		
+		modificar();
+	}
+	
 	private void btncancelar() {
-		// TODO Auto-generated method stub
+	
 		ModificarPerfil modiPer=new ModificarPerfil(dao);
 		modiPer.setVisible(true);
 		this.dispose();
 	}
 	
+	public void cargar() {
+
+		DaoImplementacionBD bd = new DaoImplementacionBD();
+		
+		textNomUsu.setText(rela.getNomUsuCli());
+		
+
+	}
 	
+	public void modificar() {
+		DaoImplementacionBD bd = new DaoImplementacionBD();
+		// Recoger los datos de la relacion
+		rela.setZodiaco(comboZodiaco.getSelectedItem().toString());
+		rela.setOrienSex(comboOrientacion.getSelectedItem().toString());
+		rela.setGustos(comboGustos.getSelectedItem().toString());
+		rela.setQueBuscas(comboQueBuscas.getSelectedItem().toString());
+		bd.modificarRelacion(rela);
+		ModificarPerfil md = new ModificarPerfil(dao);
+		md.setVisible(true);
+		this.dispose();
+
+		JOptionPane.showMessageDialog(this, "EL USUARIO SE HA MODIFICADO CORRECTAMENTE!");
+	}
 	
 	
 }

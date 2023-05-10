@@ -55,6 +55,7 @@ public class DaoImplementacionBD implements Dao {
 	final String SELECCIONAR_USUARIO = "select nomUsuCli from cliente";
 	final String SELECCIONAR_RELACION = "select * from relacion where nomUsuCli=?";
 	final String CREAR_ACTIVIDAD = "insert into actividad (nomActividad, descripcion, fecha, nomUsuCli) values (?, ?, ?, ?)";
+	final String MODIFICAR_RELACION = "update relacion set orienSex=?, zodiaco=?, gustos=?, queBuscas=? where nomUsuCli=?";
 
 	public DaoImplementacionBD() {
 		// TODO Auto-generated constructor stub
@@ -88,7 +89,9 @@ public class DaoImplementacionBD implements Dao {
 	}
 
 	// Metodo para saber si existe el usuario
+	@Override
 	public int existeUsuario(String usuario) {
+		// TODO Auto-generated method stub
 
 		ResultSet rs = null;
 		String registrar = "select count(nomUsu) from usuario where nomUsu=?";
@@ -110,6 +113,7 @@ public class DaoImplementacionBD implements Dao {
 	}
 
 	// metodo para loguearse
+	@Override
 	public Usuario login(Usuario usu) {
 		ResultSet rs;
 		Usuario usuario = null;
@@ -162,6 +166,7 @@ public class DaoImplementacionBD implements Dao {
 	}
 
 	// Metodo para insertar un nuevo registro en la base de datos utilizando un
+	@Override
 	public void insertarUsuario(Cliente cli, Ubicacion ubi) {
 
 		this.openConnection();
@@ -200,6 +205,7 @@ public class DaoImplementacionBD implements Dao {
 		}
 	}
 
+	@Override
 	public void insertarRelacion(Relacion rela) {
 		this.openConnection();
 		int rs;
@@ -213,7 +219,7 @@ public class DaoImplementacionBD implements Dao {
 			stmt.setString(3, rela.getGustos());
 			stmt.setString(4, rela.getQueBuscas());
 			stmt.setString(5, rela.getDescripcion());
-			stmt.setString(6, rela.getNomUsu());
+			stmt.setString(6, rela.getNomUsuCli());
 			rs = stmt.executeUpdate();
 
 		} catch (SQLException e) {
@@ -234,6 +240,7 @@ public class DaoImplementacionBD implements Dao {
 	 * @param email verifica que el email sigue el patron de un email convencional
 	 * @return
 	 */
+	@Override
 	public boolean esEmail(String email) {
 		// Patr�n para validar el email
 		Pattern pattern = Pattern.compile(
@@ -245,6 +252,8 @@ public class DaoImplementacionBD implements Dao {
 
 		return mather.find();
 	}
+
+	@Override
 	public Relacion cargarDatos(String nombreUsu) {
 
 		Relacion rela = new Relacion();
@@ -256,16 +265,16 @@ public class DaoImplementacionBD implements Dao {
 			ResultSet rs = stmt.executeQuery();
 
 			if (rs.next()) {
-				rela.setCodRela(rs.getString("codRela"));
+				rela.setCodRela(rs.getInt("codRela"));
 
 			}
 			stmt = con.prepareStatement(CARGAR_RELACION);
-			stmt.setString(1, rela.getCodRela());
+			stmt.setInt(1, rela.getCodRela());
 			rs = stmt.executeQuery();
 
 			if (rs.next()) {
 
-				rela.setNomUsu(rs.getString("nomUsuCli"));
+				rela.setNomUsuCli(rs.getString("nomUsuCli"));
 				rela.setOrienSex(rs.getString("orienSex"));
 				rela.setZodiaco(rs.getString("zodiaco"));
 				rela.setGustos(rs.getString("gustos"));
@@ -316,7 +325,7 @@ public class DaoImplementacionBD implements Dao {
 			stmt.setString(2, acti.getDescripcion());
 			stmt.setString(3, acti.getFecha());
 			stmt.setString(4, acti.getNomUsuCli());
-			
+
 			stmt.executeUpdate();
 
 		} catch (SQLException e) {
@@ -359,6 +368,35 @@ public class DaoImplementacionBD implements Dao {
 		}
 
 		return listadoCliente;
+	}
+
+	@Override
+	public void modificarRelacion(Relacion rela) {
+		// TODO Auto-generated method stub
+		this.openConnection();
+		int rs;
+		try {
+
+			stmt = con.prepareStatement(MODIFICAR_RELACION);
+
+			// Posicionamos cada valor para insertarlo en la base de datos
+			stmt.setString(1, rela.getOrienSex());
+			stmt.setString(2, rela.getZodiaco());
+			stmt.setString(3, rela.getGustos());
+			stmt.setString(4, rela.getQueBuscas());
+			stmt.setString(5, rela.getNomUsuCli());
+			rs = stmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		try {
+			this.closeConnection();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

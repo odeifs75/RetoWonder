@@ -167,7 +167,7 @@ public class RegistroR extends JDialog implements ActionListener {
 				rela.setGustos(comboGustos.getSelectedItem().toString());
 				rela.setQueBuscas(comboQueBuscas.getSelectedItem().toString());
 				rela.setDescripcion(textField.getText());
-				rela.setNomUsu(usu.getNomUsu());
+				rela.setNomUsuCli(usu.getNomUsu());
 				bd.insertarRelacion(rela);
 				InicioSesion re = new InicioSesion(dao);
 				re.setVisible(true);

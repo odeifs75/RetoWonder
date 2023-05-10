@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import clase.Relacion;
 import clase.Usuario;
 import modelo.Dao;
 import modelo.DaoImplementacionBD;
@@ -20,7 +21,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -34,14 +34,15 @@ public class ModificarPerfil extends JDialog implements ActionListener {
 	private JButton btnContinuar;
 	private JLabel lblNombre;
 	private Dao dao;
-	private JComboBox comboBox;
-	private List<Usuario> usuario;
+	private JComboBox comboNom;
+	private List<String> listadoCli;
 
 	/**
 	 * Create the dialog.
 	 */
 	public ModificarPerfil(Dao dao) {
-		setIconImage(Toolkit.getDefaultToolkit().getImage(".\\.\\imagenes\\logo.png"));
+	
+		this.dao=dao;
 		setBounds(100, 100, 480, 487);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(new Color(238, 83, 130));
@@ -55,6 +56,7 @@ public class ModificarPerfil extends JDialog implements ActionListener {
 
 		btnContinuar = new JButton("Continuar");
 		btnContinuar.setBounds(323, 397, 131, 40);
+		btnContinuar.addActionListener(this);
 		contentPanel.add(btnContinuar);
 
 		lblNombre = new JLabel("Introducir el usuario que deseas modificar");
@@ -63,28 +65,39 @@ public class ModificarPerfil extends JDialog implements ActionListener {
 		lblNombre.setBounds(27, 119, 427, 46);
 		contentPanel.add(lblNombre);
 
-		comboBox = new JComboBox();
-		comboBox.setBounds(152, 192, 141, 22);
-		contentPanel.add(comboBox);
+		comboNom = new JComboBox();
+		comboNom.setBounds(152, 192, 141, 22);
+		contentPanel.add(comboNom);
 		
 		List<String> listadoCli=dao.listarUsuCli();
 		for(String cli: listadoCli) {
-			comboBox.addItem(cli);
+			comboNom.addItem(cli);
 		}
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-
+		if(e.getSource().equals(btnContinuar)) {
+			continuar();
+		}else if(e.getSource().equals(btnCancelar)){
+			cerrar();
+		}
 	}
 
 	
 
 
+	private void continuar() {
+		DaoImplementacionBD bd=new DaoImplementacionBD();
+		Relacion rela = bd.cargarDatos(comboNom.getSelectedItem().toString());
+		Modificar mod = new Modificar(dao, rela);
+		mod.setVisible(true);
+		this.dispose();
+	}
+
 	// Boton de cerrar para volver a la venta anterior
 	private void cerrar() {
-		// TODO Auto-generated method stub
+		
 		VAdministrador vAdmin = new VAdministrador(dao);
 		vAdmin.setVisible(true);
 		this.dispose();

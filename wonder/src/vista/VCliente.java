@@ -241,7 +241,7 @@ public class VCliente extends JDialog implements ActionListener {
 		DaoImplementacionBD bd = new DaoImplementacionBD();
 		Relacion rela =	bd.cargarDatos(usu.getNomUsu());
 		
-		textNomUsu.setText(rela.getNomUsu());
+		textNomUsu.setText(rela.getNomUsuCli());
 		textOrientacion.setText(rela.getOrienSex());
 		textZodiaco.setText(rela.getZodiaco());
 		textGustos.setText(rela.getGustos());
