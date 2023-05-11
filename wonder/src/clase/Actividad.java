@@ -13,6 +13,7 @@ import javax.swing.JTextField;
  */
 public class Actividad {
 	// ATRIBUTOS
+	private int codActividad;
 	private String nomActividad;
 	private String descripcion;
 	private String fecha;
@@ -83,4 +84,19 @@ public class Actividad {
 		this.nomUsuCli = nomUsuCli;
 	}
 
+	/**
+	 * @return
+	 */
+	public int getCodActividad() {
+		return codActividad;
+	}
+
+	/**
+	 * @param codActividad
+	 */
+	public void setCodActividad(int codActividad) {
+		this.codActividad = codActividad;
+	}
+
+	
 }

@@ -56,6 +56,10 @@ public class DaoImplementacionBD implements Dao {
 	final String SELECCIONAR_RELACION = "select * from relacion where nomUsuCli=?";
 	final String CREAR_ACTIVIDAD = "insert into actividad (nomActividad, descripcion, fecha, nomUsuCli) values (?, ?, ?, ?)";
 	final String MODIFICAR_RELACION = "update relacion set orienSex=?, zodiaco=?, gustos=?, queBuscas=? where nomUsuCli=?";
+	final String SELECCIONAR_ACTIVIDAD = " select * from actividad";
+	final String SELECCIONAR_CLIENTE = "select fechaNac from cliente";
+	final String SELECCIONAR_RELACION2 = "select * from relacion";
+	final String SELECCIONAR_CLIENTES="select * from cliente"; 
 
 	public DaoImplementacionBD() {
 		// TODO Auto-generated constructor stub
@@ -399,4 +403,117 @@ public class DaoImplementacionBD implements Dao {
 		}
 	}
 
+	@Override
+	public List<Actividad> consultarActividades() {
+		List<Actividad> actividades = new ArrayList<>();
+
+		Actividad actividad = null;
+
+		this.openConnection();
+
+		try {
+			stmt = con.prepareStatement(SELECCIONAR_ACTIVIDAD);
+			ResultSet rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				actividad = new Actividad();
+
+				actividad.setCodActividad(rs.getInt(1));
+				actividad.setNomActividad(rs.getString(2));
+				actividad.setFecha(rs.getString(3));
+				actividad.setDescripcion(rs.getString(4));
+				actividades.add(actividad);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			this.closeConnection();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return actividades;
+	}
+
+	@Override
+	public List<Cliente> consultarPerfil() {
+		// TODO Auto-generated method stub
+		List<Cliente> clientes = new ArrayList<>();
+		List<Relacion> relaciones = new ArrayList<>();
+
+		Cliente cliente;
+		Relacion relacion;
+
+		ResultSet rs;	
+		this.openConnection();
+		try {
+			stmt = con.prepareStatement(SELECCIONAR_CLIENTE);
+			 rs = stmt.executeQuery();
+			while (rs.next()) {
+				cliente = new Cliente();
+				cliente.setNomUsu(rs.getString(1));
+				cliente.setFechaNac(rs.getDate(2).toLocalDate());
+			}
+			
+			stmt=con.prepareStatement(SELECCIONAR_RELACION2);
+			 rs = stmt.executeQuery();
+			while (rs.next()) {
+				relacion = new Relacion();
+				relacion.setOrienSex(rs.getString(3));
+				relacion.setZodiaco(rs.getString(4));
+				relacion.setGustos(rs.getString(5));
+				relacion.setQueBuscas(rs.getString(6));
+				relacion.setDescripcion(rs.getString(7));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		
+		}
+		
+		return null;
+	}
+	
+	
+	@Override
+	public List<Cliente> consultarClientes() {
+		List<Cliente> clientes = new ArrayList<>();
+		Cliente cliente = null;
+		this.openConnection();
+		try {
+			stmt = con.prepareStatement(SELECCIONAR_CLIENTES);
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				cliente = new Cliente();
+				
+				cliente.setNomUsu(rs.getString(1));				
+				cliente.setFechaNac(rs.getDate(2).toLocalDate());
+				cliente.setEmail(rs.getString(3));
+				clientes.add(cliente);
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		try {
+			this.closeConnection();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return clientes;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

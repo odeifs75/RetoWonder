@@ -59,11 +59,12 @@ public class BajaUsuario extends JDialog implements ActionListener {
 		contentPane.add(lblborrar);
 		
 		textFieldBorrar = new JTextField();
+		textFieldBorrar.setForeground(Color.WHITE);
 		textFieldBorrar.setBackground(new Color(238, 83, 130));
 		textFieldBorrar.setBorder(new MatteBorder(0, 0, 1, 0, (Color) Color.WHITE));
 		textFieldBorrar.setFont(new Font("Verdana", Font.PLAIN, 11));
 		textFieldBorrar.setColumns(10);
-		textFieldBorrar.setBounds(99, 140, 221, 32);
+		textFieldBorrar.setBounds(99, 146, 221, 26);
 		contentPane.add(textFieldBorrar);
 		
 		btnCancelar = new JButton("Cancelar");

@@ -200,7 +200,7 @@ public class VCliente extends JDialog implements ActionListener {
 		textDescrip.setForeground(Color.WHITE);
 		textDescrip.setBackground(new Color(238, 83, 130));
 		textDescrip.setColumns(10);
-		textDescrip.setBounds(135, 300, 319, 73);
+		textDescrip.setBounds(135, 298, 319, 30);
 		contentPanel.add(textDescrip);
 		
 		btnmensaje = new JButton("");
@@ -209,6 +209,7 @@ public class VCliente extends JDialog implements ActionListener {
 		btnmensaje.setForeground(new Color(238, 83, 130));
 		btnmensaje.setBackground(new Color(238, 83, 130));
 		btnmensaje.setBounds(251, 481, 77, 53);
+		btnmensaje.addActionListener(this);
 		contentPanel.add(btnmensaje);
 		cargar();
 	
@@ -221,7 +222,16 @@ public class VCliente extends JDialog implements ActionListener {
 			cerrarSesion();
 		}else if(e.getSource().equals(btnActividad)) {
 			actividades();
+		}else if(e.getSource().equals(btnmensaje)) {
+			verPerfil();
 		}
+	}
+
+	private void verPerfil() {
+		// TODO Auto-generated method stub
+		VerPerfil verper=new VerPerfil(dao);
+		verper.setVisible(true);
+		this.dispose();
 	}
 
 	private void actividades() {
@@ -233,14 +243,23 @@ public class VCliente extends JDialog implements ActionListener {
 
 	private void cerrarSesion() {
 		// TODO Auto-generated method stub
-		
+		Inicio ini = new Inicio(dao);
+		ini.setVisible(true);
+		this.dispose();
 	}
 
 	public void cargar() {
 		
 		DaoImplementacionBD bd = new DaoImplementacionBD();
+		/*
+		 * Al principio de esta clase llamamos a la clase Usuario en la cual hemos
+		 * guardado los datos que han introducido en el login, le pasamos por parametro
+		 * el metodo en el que conseguimos el nombre de usuario (En el
+		 * DaoImplementaciones explico porque)
+		 */
+		// En el objeto rela le pasamos los datos del metodo
 		Relacion rela =	bd.cargarDatos(usu.getNomUsu());
-		
+		// Cogemos los datos del DAOImplementaciones
 		textNomUsu.setText(rela.getNomUsuCli());
 		textOrientacion.setText(rela.getOrienSex());
 		textZodiaco.setText(rela.getZodiaco());

@@ -67,8 +67,9 @@ public class InicioSesion extends JDialog implements ActionListener {
 		}
 		{
 			textFieldnomUsu = new JTextField();
+			textFieldnomUsu.setForeground(Color.WHITE);
 			textFieldnomUsu.setBounds(140, 140, 136, 26);
-			textFieldnomUsu.setFont(new Font("Verdana", Font.PLAIN, 11));
+			textFieldnomUsu.setFont(new Font("Verdana", Font.PLAIN, 17));
 			textFieldnomUsu.setCaretColor(Color.WHITE);
 			textFieldnomUsu.setBackground(new Color(238, 83, 130));
 			textFieldnomUsu.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(255, 255, 255)));
@@ -107,8 +108,9 @@ public class InicioSesion extends JDialog implements ActionListener {
 		}
 
 		password = new JPasswordField();
+		password.setForeground(Color.WHITE);
 		password.setBounds(140, 240, 136, 26);
-		password.setFont(new Font("Verdana", Font.PLAIN, 11));
+		password.setFont(new Font("Verdana", Font.PLAIN, 17));
 		password.setBackground(new Color(238, 83, 130));
 		password.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(255, 255, 255)));
 		getContentPane().add(password);

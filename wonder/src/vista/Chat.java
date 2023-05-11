@@ -6,11 +6,19 @@ import java.awt.FlowLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+
+import clase.Actividad;
+import clase.Cliente;
+import modelo.Dao;
+
 import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Toolkit;
+import java.util.List;
 
 import javax.swing.JTable;
 import javax.swing.JSeparator;
@@ -18,8 +26,7 @@ import javax.swing.JSeparator;
 public class Chat extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	private JTable table;
-
+	private Dao dao;
 	
 
 	/**
@@ -34,11 +41,6 @@ public class Chat extends JDialog {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		
-		table = new JTable();
-		table.setFont(new Font("Verdana", Font.PLAIN, 11));
-		table.setBounds(50, 77, 367, 225);
-		contentPanel.add(table);
-		
 		JLabel lblNewLabel = new JLabel("CHAT");
 		lblNewLabel.setFont(new Font("Verdana", Font.BOLD, 21));
 		lblNewLabel.setForeground(new Color(255, 255, 255));
@@ -49,5 +51,11 @@ public class Chat extends JDialog {
 		JSeparator separator = new JSeparator();
 		separator.setBounds(10, 56, 444, 10);
 		contentPanel.add(separator);
+		
+		
+		
+		
 	}
+	
+	
 }

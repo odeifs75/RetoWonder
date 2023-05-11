@@ -86,7 +86,7 @@ public class Relacion {
 	 * @param descripcion
 	 */
 	public void setQueBuscas(String queBuscas) {
-		this.queBuscas = descripcion;
+		this.queBuscas = queBuscas;
 	}
 
 	/**

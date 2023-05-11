@@ -57,19 +57,20 @@ public class VActividad extends JDialog implements ActionListener {
 		getContentPane().add(lblActividades);
 		
 		btncrear = new JButton("Crear actividad");
-		btncrear.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btncrear.setBounds(153, 84, 163, 53);
+		btncrear.setFont(new Font("Verdana", Font.PLAIN, 17));
+		btncrear.setBounds(153, 84, 185, 53);
 		btncrear.addActionListener(this);
 		getContentPane().add(btncrear);
 		
 		btninscribir = new JButton("Inscribirse en una actividad");
 		btninscribir.setToolTipText("");
-		btninscribir.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btninscribir.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		btninscribir.setBounds(115, 193, 258, 53);
+		btninscribir.addActionListener(this);
 		getContentPane().add(btninscribir);
 		
 		btnVolver = new JButton("Volver");
-		btnVolver.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnVolver.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		btnVolver.setBounds(153, 304, 163, 53);
 		btnVolver.addActionListener(this);
 		getContentPane().add(btnVolver);
@@ -83,6 +84,7 @@ public class VActividad extends JDialog implements ActionListener {
 		getContentPane().add(btnlupa);
 		
 		btnactividad = new JButton("");
+		btnactividad.setEnabled(false);
 		btnactividad.setBackground(new Color(238, 83, 130));
 		btnactividad.setBorder(null);
 		btnactividad.setIcon(new ImageIcon(".\\.\\imagenes\\actividad.png"));
@@ -116,7 +118,17 @@ public class VActividad extends JDialog implements ActionListener {
 			crear();
 		}else if(e.getSource().equals(btnVolver)) {
 			volver();
+		}else if(e.getSource().equals(btninscribir)){
+			inscribir();
 		}
+	}
+
+
+	private void inscribir() {
+		// TODO Auto-generated method stub
+		VerActividad verActi=new VerActividad(this, true, dao);
+		verActi.setVisible(true);
+		this.dispose();
 	}
 
 

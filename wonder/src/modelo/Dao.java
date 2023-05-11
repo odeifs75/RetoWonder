@@ -29,4 +29,10 @@ public interface Dao {
 	public boolean esEmail(String email);
 
 	public void modificarRelacion(Relacion rela);
+
+	public List<Actividad> consultarActividades();
+
+	public List<Cliente> consultarPerfil();
+	
+	public List<Cliente> consultarClientes();
 }

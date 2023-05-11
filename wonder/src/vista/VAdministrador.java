@@ -80,8 +80,8 @@ public class VAdministrador extends JDialog implements ActionListener {
 			baja();
 		}else if (e.getSource().equals(btnModificar)){
 			modificar();
-//		}else if(e.getSource().equals(btnAlta)) {
-//			alta();
+		}else if(e.getSource().equals(btnAlta)) {
+			alta();
 		}else if(e.getSource().equals(btnCerrarSesion)) {
 			cerrarSesion();
 		}
@@ -90,18 +90,18 @@ public class VAdministrador extends JDialog implements ActionListener {
 
 	private void cerrarSesion() {
 		// TODO Auto-generated method stub
-		Inicio ini=new Inicio(dao);
-		ini.setVisible(true);
+		InicioSesion iniSe=new InicioSesion(dao);
+		iniSe.setVisible(true);
 		this.dispose();
 	}
 
 
-//	private void alta() {
-//		// TODO Auto-generated method stub
-//		Alta al=new Alta(dao);
-//		al.setVisible(true);
-//		this.dispose();
-//	}
+	private void alta() {
+		// TODO Auto-generated method stub
+		ConfirmarAlta conAl=new ConfirmarAlta(dao);
+		conAl.setVisible(true);
+		this.dispose();
+	}
 
 
 	private void baja() {

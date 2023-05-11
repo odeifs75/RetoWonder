@@ -125,10 +125,17 @@ public class Registro extends JDialog implements ActionListener {
 		}
 
 		passwordField = new JPasswordField();
+		passwordField.setForeground(Color.WHITE);
+		passwordField.setBackground(new Color(238, 83, 130));
+		passwordField.setBorder(new MatteBorder(0, 0, 2, 0, (Color) Color.WHITE));
+		passwordField.setFont(new Font("Verdana", Font.PLAIN, 17));
 		passwordField.setBounds(10, 177, 136, 26);
 		contentPanel.add(passwordField);
 
 		passwordField_1 = new JPasswordField();
+		passwordField_1.setFont(new Font("Verdana", Font.PLAIN, 17));
+		passwordField_1.setBorder(new MatteBorder(0, 0, 2, 0, (Color) Color.WHITE));
+		passwordField_1.setBackground(new Color(238, 83, 130));
 		passwordField_1.setBounds(227, 177, 143, 26);
 		contentPanel.add(passwordField_1);
 		lblFechaNAc = new JLabel("Fecha de nacimiento");
@@ -155,6 +162,10 @@ public class Registro extends JDialog implements ActionListener {
 		}
 
 		textFieldfechaNac = new JTextField();
+		textFieldfechaNac.setForeground(Color.WHITE);
+		textFieldfechaNac.setFont(new Font("Verdana", Font.PLAIN, 17));
+		textFieldfechaNac.setBackground(new Color(238, 83, 130));
+		textFieldfechaNac.setBorder(new MatteBorder(0, 0, 2, 0, (Color) Color.WHITE));
 		textFieldfechaNac.setBounds(227, 260, 176, 26);
 		contentPanel.add(textFieldfechaNac);
 		textFieldfechaNac.setColumns(10);
@@ -162,50 +173,64 @@ public class Registro extends JDialog implements ActionListener {
 		lblPais = new JLabel("Pais");
 		lblPais.setForeground(Color.WHITE);
 		lblPais.setFont(new Font("Tahoma", Font.BOLD, 17));
-		lblPais.setBounds(10, 292, 85, 38);
+		lblPais.setBounds(10, 300, 85, 38);
 		contentPanel.add(lblPais);
 
 		lblCodPostal = new JLabel("Codigo Postal");
 		lblCodPostal.setForeground(Color.WHITE);
 		lblCodPostal.setFont(new Font("Tahoma", Font.BOLD, 17));
-		lblCodPostal.setBounds(156, 378, 136, 26);
+		lblCodPostal.setBounds(152, 403, 136, 26);
 		contentPanel.add(lblCodPostal);
 
 		lblCiudad = new JLabel("Ciudad");
 		lblCiudad.setForeground(Color.WHITE);
 		lblCiudad.setFont(new Font("Tahoma", Font.BOLD, 17));
-		lblCiudad.setBounds(227, 307, 76, 21);
+		lblCiudad.setBounds(227, 309, 76, 21);
 		contentPanel.add(lblCiudad);
 
 		textFieldPais = new JTextField();
+		textFieldPais.setForeground(Color.WHITE);
+		textFieldPais.setFont(new Font("Verdana", Font.PLAIN, 17));
+		textFieldPais.setBorder(new MatteBorder(0, 0, 2, 0, (Color) Color.WHITE));
+		textFieldPais.setBackground(new Color(238, 83, 130));
 		textFieldPais.setColumns(10);
-		textFieldPais.setBounds(10, 335, 169, 26);
+		textFieldPais.setBounds(10, 340, 169, 26);
 		contentPanel.add(textFieldPais);
 
 		textFieldCiudad = new JTextField();
+		textFieldCiudad.setForeground(Color.WHITE);
+		textFieldCiudad.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		textFieldCiudad.setBackground(new Color(238, 83, 130));
+		textFieldCiudad.setBorder(new MatteBorder(0, 0, 2, 0, (Color) Color.WHITE));
 		textFieldCiudad.setColumns(10);
-		textFieldCiudad.setBounds(227, 339, 176, 26);
+		textFieldCiudad.setBounds(227, 340, 176, 26);
 		contentPanel.add(textFieldCiudad);
 
 		textFieldCodigoPostal = new JTextField();
+		textFieldCodigoPostal.setForeground(Color.WHITE);
+		textFieldCodigoPostal.setFont(new Font("Verdana", Font.PLAIN, 17));
+		textFieldCodigoPostal.setBorder(new MatteBorder(0, 0, 2, 0, (Color) Color.WHITE));
+		textFieldCodigoPostal.setBackground(new Color(238, 83, 130));
 		textFieldCodigoPostal.setColumns(10);
-		textFieldCodigoPostal.setBounds(152, 417, 136, 26);
+		textFieldCodigoPostal.setBounds(152, 440, 136, 26);
 		contentPanel.add(textFieldCodigoPostal);
 		
 		textFieldEmail = new JTextField();
-		textFieldEmail.setFont(new Font("Verdana", Font.PLAIN, 11));
+		textFieldEmail.setForeground(Color.WHITE);
+		textFieldEmail.setFont(new Font("Verdana", Font.PLAIN, 17));
 		textFieldEmail.setColumns(10);
 		textFieldEmail.setBorder(new MatteBorder(0, 0, 2, 0, (Color) Color.WHITE));
 		textFieldEmail.setBackground(new Color(238, 83, 130));
-		textFieldEmail.setBounds(227, 80, 160, 26);
+		textFieldEmail.setBounds(227, 90, 160, 26);
 		contentPanel.add(textFieldEmail);
 		
 		textFieldnomUsu = new JTextField();
-		textFieldnomUsu.setFont(new Font("Verdana", Font.PLAIN, 11));
+		textFieldnomUsu.setForeground(Color.WHITE);
+		textFieldnomUsu.setFont(new Font("Verdana", Font.PLAIN, 17));
 		textFieldnomUsu.setColumns(10);
 		textFieldnomUsu.setBorder(new MatteBorder(0, 0, 2, 0, (Color) Color.WHITE));
 		textFieldnomUsu.setBackground(new Color(238, 83, 130));
-		textFieldnomUsu.setBounds(10, 80, 160, 26);
+		textFieldnomUsu.setBounds(10, 90, 160, 26);
 		contentPanel.add(textFieldnomUsu);
 	}
 

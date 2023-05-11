@@ -130,6 +130,7 @@ public class RegistroR extends JDialog implements ActionListener {
 		contentPanel.add(lblDescripcion);
 
 		textField = new JTextField();
+		textField.setFont(new Font("Verdana", Font.PLAIN, 17));
 		textField.setBounds(55, 238, 344, 150);
 		contentPanel.add(textField);
 		textField.setColumns(10);
