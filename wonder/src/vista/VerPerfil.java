@@ -54,6 +54,7 @@ public class VerPerfil extends JDialog {
 	
 	private JTable cargarTabla() {
 		JTable tabla=new JTable();
+		Relacion rel;
 		
 		// Columnas
 		String[] columnNames = { "Nombre", "Fecha Nacimiento", "Orientacion Sexual", "Zodiaco", "Que Buscas", "Descripcion", "Like" };
@@ -63,18 +64,19 @@ public class VerPerfil extends JDialog {
 		DefaultTableModel model = new DefaultTableModel(null, columnNames);
 
 		// data of the table
-		clientes = dao.consultarPerfil();
+		clientes = dao.consultarClientes();
+		relaciones = dao.consultarRelaciones();
 
 		for (Cliente cli : clientes) {
+			rel = new Relacion();
+			
 			fila[0] = cli.getNomUsu();
 			fila[1] = cli.getFechaNac().toString();
-			for(Relacion rela: relaciones) {
-				fila[0] = rela.getOrienSex();
-				fila[1] = rela.getZodiaco();
-				fila[2] = rela.getGustos();
-				fila[3] = rela.getQueBuscas();
-				fila[4] = rela.getDescripcion();
-			}
+			// Busco la Relación de este cliente
+			rel = obtenerRelacion(cli.getNomUsu());
+				
+			fila[2] = rel.getOrienSex();
+			fila[3] = rel.getZodiaco();
 
 			
 
@@ -82,5 +84,16 @@ public class VerPerfil extends JDialog {
 		}
 
 		return new JTable(model);
+	}
+
+
+	private Relacion obtenerRelacion(String nomUsu) {
+		
+		for (Relacion rel : relaciones) {
+			if(nomUsu.equals(rel.getNomUsuCli())) {
+				return rel;
+			}
+		}
+		return null;
 	}
 }

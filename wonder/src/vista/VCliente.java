@@ -222,17 +222,24 @@ public class VCliente extends JDialog implements ActionListener {
 			cerrarSesion();
 		}else if(e.getSource().equals(btnActividad)) {
 			actividades();
-		}else if(e.getSource().equals(btnmensaje)) {
-			verPerfil();
+		}else if (e.getSource().equals(btnlupa)) {
+			buscarPersonas();
 		}
 	}
 
-	private void verPerfil() {
-		// TODO Auto-generated method stub
-		VerPerfil verper=new VerPerfil(dao);
-		verper.setVisible(true);
+	private void buscarPersonas() {
+		VerPerfil verPer=new VerPerfil(dao);
+		verPer.setVisible(true);
 		this.dispose();
+		
 	}
+
+//	private void verPerfil() {
+//		// TODO Auto-generated method stub
+//		VerPerfil verper=new VerPerfil(dao);
+//		verper.setVisible(true);
+//		this.dispose();
+//	}
 
 	private void actividades() {
 		// TODO Auto-generated method stub

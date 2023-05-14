@@ -437,44 +437,33 @@ public class DaoImplementacionBD implements Dao {
 		return actividades;
 	}
 
-	@Override
-	public List<Cliente> consultarPerfil() {
-		// TODO Auto-generated method stub
-		List<Cliente> clientes = new ArrayList<>();
-		List<Relacion> relaciones = new ArrayList<>();
-
-		Cliente cliente;
-		Relacion relacion;
-
-		ResultSet rs;	
-		this.openConnection();
-		try {
-			stmt = con.prepareStatement(SELECCIONAR_CLIENTE);
-			 rs = stmt.executeQuery();
-			while (rs.next()) {
-				cliente = new Cliente();
-				cliente.setNomUsu(rs.getString(1));
-				cliente.setFechaNac(rs.getDate(2).toLocalDate());
-			}
-			
-			stmt=con.prepareStatement(SELECCIONAR_RELACION2);
-			 rs = stmt.executeQuery();
-			while (rs.next()) {
-				relacion = new Relacion();
-				relacion.setOrienSex(rs.getString(3));
-				relacion.setZodiaco(rs.getString(4));
-				relacion.setGustos(rs.getString(5));
-				relacion.setQueBuscas(rs.getString(6));
-				relacion.setDescripcion(rs.getString(7));
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		
-		}
-		
-		return null;
-	}
+//	@Override
+//	public List<Cliente> consultarPerfil() {
+//		// TODO Auto-generated method stub
+//		List<Cliente> clientes = new ArrayList<>();
+//
+//		Cliente cliente;
+//		
+//
+//		ResultSet rs;	
+//		this.openConnection();
+//		try {
+//			stmt = con.prepareStatement(SELECCIONAR_CLIENTE);
+//			 rs = stmt.executeQuery();
+//			while (rs.next()) {
+//				cliente = new Cliente();
+//				cliente.setNomUsu(rs.getString(1));
+//				cliente.setEmail(rs.getString(2));
+//				cliente.setFechaNac(rs.getDate(3).toLocalDate());
+//			}
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		
+//		}
+//		
+//		return null;
+//	}
 	
 	
 	@Override
@@ -489,8 +478,8 @@ public class DaoImplementacionBD implements Dao {
 				cliente = new Cliente();
 				
 				cliente.setNomUsu(rs.getString(1));				
-				cliente.setFechaNac(rs.getDate(2).toLocalDate());
-				cliente.setEmail(rs.getString(3));
+				cliente.setFechaNac(rs.getDate(3).toLocalDate());
+				cliente.setEmail(rs.getString(2));
 				clientes.add(cliente);
 				
 			}
@@ -504,6 +493,35 @@ public class DaoImplementacionBD implements Dao {
 		}
 
 		return clientes;
+	}
+
+	@Override
+	public List<Relacion> consultarRelaciones() {
+		List<Relacion> relaciones = new ArrayList<>();
+		Relacion relacion = null;
+		this.openConnection();
+		try {
+			stmt = con.prepareStatement(SELECCIONAR_RELACION2);
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				relacion = new Relacion();
+				
+				relacion.setOrienSex(rs.getString(1));				
+				relacion.setZodiaco(rs.getString(2));
+				relacion.setDescripcion(rs.getString(3));
+				relaciones.add(relacion);
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		try {
+			this.closeConnection();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return relaciones;
 	}
 	
 	

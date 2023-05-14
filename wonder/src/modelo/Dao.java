@@ -32,7 +32,9 @@ public interface Dao {
 
 	public List<Actividad> consultarActividades();
 
-	public List<Cliente> consultarPerfil();
+//	public List<Cliente> consultarPerfil();
 	
 	public List<Cliente> consultarClientes();
+
+	public List<Relacion> consultarRelaciones();
 }

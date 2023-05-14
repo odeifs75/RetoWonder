@@ -54,7 +54,7 @@ public class VerActividad extends JDialog implements ActionListener {
 
 //		presentarTabla();
 		JScrollPane scroll = new JScrollPane();
-		table = this.cargarTabla();
+//		table = this.cargarTabla();
 		scroll.setViewportView(table);
 
 		contentPanel.add(scroll);
