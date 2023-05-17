@@ -1,10 +1,13 @@
 package modelo;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,9 +18,11 @@ import javax.swing.JOptionPane;
 
 import com.mysql.cj.exceptions.RSAException;
 
+import clase.Actividad;
 import clase.Administrador;
 import clase.Cliente;
 import clase.Relacion;
+import clase.Ubicacion;
 import clase.Usuario;
 
 public class DaoImplementacionBD implements Dao {
@@ -32,8 +37,6 @@ public class DaoImplementacionBD implements Dao {
 	private String urlBD;
 	private String userBD;
 	private String passwordBD;
-	
-	
 
 	// Sentencias sql
 	final String LOGIN = "select * from usuario where nomUsu=? and contraseina=?";
@@ -46,6 +49,13 @@ public class DaoImplementacionBD implements Dao {
 	final String CARGAR_RELACION = "select * from relacion where codRela=?";
 	final String ELIMINAR_USUARIO = "delete from usuario where nomUsu=?";
 	final String PILLAR_NOM = "select codRela from relacion where NomUsuCli=?";
+	final String SELECCIONAR_USUARIO = "select nomUsuCli from cliente";
+	final String MODIFICAR_RELACION = "update relacion set orienSex=?, zodiaco=?, gustos=?, queBuscas=? where nomUsuCli=?";
+	final String CREAR_ACTIVIDAD = "insert into actividad (nomActividad, descripcion, fecha, nomUsuCli) values (?, ?, ?,?)";
+	final String CREAR_CREAR = "insert into crear (nomUsuCli, codactividad) values (?, ?)";
+	final String SELECCIONAR_ACTIVIDAD = " select * from actividad";
+	final String SELECCIONAR_CLIENTES = "select * from cliente";
+	final String SELECCIONAR_RELACION="select * from relacion";
 
 	public DaoImplementacionBD() {
 		// TODO Auto-generated constructor stub
@@ -69,7 +79,7 @@ public class DaoImplementacionBD implements Dao {
 		}
 	}
 
-//cerramos la conexion
+	// cerramos la conexion
 	private void closeConnection() throws SQLException {
 		if (stmt != null) {
 			stmt.close();
@@ -153,7 +163,7 @@ public class DaoImplementacionBD implements Dao {
 	}
 
 	// Metodo para insertar un nuevo registro en la base de datos utilizando un
-	public void insertarUsuario(Cliente cli) {
+	public void insertarUsuario(Cliente cli, Ubicacion ubi) {
 
 		this.openConnection();
 		int rs;
@@ -168,7 +178,7 @@ public class DaoImplementacionBD implements Dao {
 
 			stmt = con.prepareStatement(INSERTAR_CLIENTE);
 			stmt.setString(1, cli.getNomUsu());
-			stmt.setString(2, cli.getEdad());
+			stmt.setDate(2, Date.valueOf(cli.getFechaNac()));
 			stmt.setString(3, cli.getGenero());
 			rs = stmt.executeUpdate();
 
@@ -197,7 +207,7 @@ public class DaoImplementacionBD implements Dao {
 			stmt.setString(3, rela.getGustos());
 			stmt.setString(4, rela.getQueBuscas());
 			stmt.setString(5, rela.getDescripcion());
-			stmt.setString(6, rela.getNomUsu());
+			stmt.setString(6, rela.getNomUsuCli());
 			rs = stmt.executeUpdate();
 
 		} catch (SQLException e) {
@@ -233,26 +243,26 @@ public class DaoImplementacionBD implements Dao {
 	public Relacion cargarDatos(String nombreUsu) {
 
 		Relacion rela = new Relacion();
-		
-		
-
+		// el nombre lo usamos para conseguir el codRela y lo traemos de la clase
+		// VCliente que lo pasamos por parametro
 		this.openConnection();
+
 		try {
 			stmt = con.prepareStatement(PILLAR_NOM);
 			stmt.setString(1, nombreUsu);
-			ResultSet rs=stmt.executeQuery();
-			
-			if(rs.next()) {
-				rela.setCodRela(rs.getString("codRela"));
-				
+			ResultSet rs = stmt.executeQuery();
+
+			if (rs.next()) {
+				rela.setCodRela(rs.getInt("codRela"));
+
 			}
 			stmt = con.prepareStatement(CARGAR_RELACION);
-			stmt.setString(1, rela.getCodRela());
+			stmt.setInt(1, rela.getCodRela());
 			rs = stmt.executeQuery();
 
 			if (rs.next()) {
-				
-				rela.setNomUsu(rs.getString("nomUsuCli"));
+
+				rela.setNomUsuCli(rs.getString("nomUsuCli"));
 				rela.setOrienSex(rs.getString("orienSex"));
 				rela.setZodiaco(rs.getString("zodiaco"));
 				rela.setGustos(rs.getString("gustos"));
@@ -290,5 +300,179 @@ public class DaoImplementacionBD implements Dao {
 		}
 
 	}
+
+	@Override
+	public List<String> listarUsuCli() {
+		List<String> listadoCliente = new ArrayList<>();
+		String usuCli;
+		this.openConnection();
+		try {
+			stmt = con.prepareStatement(SELECCIONAR_USUARIO);
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				usuCli = rs.getString(1);
+				listadoCliente.add(usuCli);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			this.closeConnection();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return listadoCliente;
+
+	}
+
+	public void modificarRelacion(Relacion rela) {
+		this.openConnection();
+		int rs;
+		try {
+
+			stmt = con.prepareStatement(MODIFICAR_RELACION);
+
+			// Posicionamos cada valor para insertarlo en la base de datos
+			stmt.setString(1, rela.getOrienSex());
+			stmt.setString(2, rela.getZodiaco());
+			stmt.setString(3, rela.getGustos());
+			stmt.setString(4, rela.getQueBuscas());
+			stmt.setString(5, rela.getNomUsuCli());
+			rs = stmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		try {
+			this.closeConnection();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	public void crearActividad(Actividad acti) {
+		this.openConnection();
+		ResultSet rs = null;
+		try {
+
+			/* cogemos los datos de la bases de datos */
+			stmt = con.prepareStatement(CREAR_ACTIVIDAD);
+			stmt.setString(1, acti.getNomActividad());
+			stmt.setString(2, acti.getDescripcion());
+			stmt.setString(3, acti.getFecha());
+			stmt.setString(4, acti.getNomUsuCli());
+
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			this.closeConnection();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	@Override
+	public List<Actividad> consultarActividades() {
+		List<Actividad> actividades = new ArrayList<>();
+
+		Actividad actividad = null;
+
+		this.openConnection();
+
+		try {
+			stmt = con.prepareStatement(SELECCIONAR_ACTIVIDAD);
+			ResultSet rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				actividad = new Actividad();
+
+				actividad.setCodActividad(rs.getInt(1));
+				actividad.setNomActividad(rs.getString(2));
+				actividad.setFecha(rs.getString(3));
+				actividad.setDescripcion(rs.getString(4));
+				actividades.add(actividad);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			this.closeConnection();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return actividades;
+	}
+
+	@Override
+	public List<Cliente> consultarClientes() {
+		List<Cliente> clientes = new ArrayList<>();
+		Cliente cliente = null;
+		this.openConnection();
+		try {
+			stmt = con.prepareStatement(SELECCIONAR_CLIENTES);
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				cliente = new Cliente();
+				cliente.setNomUsu(rs.getString(1));
+				cliente.setEmail(rs.getString(2));
+				cliente.setFechaNac(rs.getDate(3).toLocalDate());
+				
+				clientes.add(cliente);
+
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		try {
+			this.closeConnection();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return clientes;
+	}
+
+
+
+@Override
+public List<Relacion> consultarRelaciones() {
+	List<Relacion> relaciones = new ArrayList<>();
+	Relacion relacion = null;
+	this.openConnection();
+	try {
+		stmt = con.prepareStatement(SELECCIONAR_RELACION);
+		ResultSet rs = stmt.executeQuery();
+		while (rs.next()) {
+			relacion = new Relacion();
+
+			relacion.setOrienSex(rs.getString(1));
+			relacion.setZodiaco(rs.getString(2));
+			relacion.setDescripcion(rs.getString(3));
+			relaciones.add(relacion);
+
+		}
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
+	try {
+		this.closeConnection();
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
+
+	return relaciones;
+}
 
 }

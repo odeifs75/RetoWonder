@@ -1,4 +1,4 @@
-package vista;
+ package vista;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -8,6 +8,7 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import clase.Usuario;
 import modelo.Dao;
 
 import java.awt.Color;
@@ -21,6 +22,10 @@ public class VAdministrador extends JDialog implements ActionListener {
 	private final JPanel contentPanel = new JPanel();
 	private JButton btnBaja;
 	private Dao dao;
+	private JButton btnModificar;
+	private JButton btnAlta;
+	private JButton btncerrarSesion;
+
 
 
 	/**
@@ -35,14 +40,16 @@ public class VAdministrador extends JDialog implements ActionListener {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		{
-			JButton btnNewButton = new JButton("Modificar ");
-			btnNewButton.setBounds(155, 154, 192, 32);
-			contentPanel.add(btnNewButton);
+			btnModificar = new JButton("Modificar");
+			btnModificar.setBounds(155, 154, 192, 32);
+			btnModificar.addActionListener(this);
+			contentPanel.add(btnModificar);
 		}
 		{
-			JButton btnNewButton_1 = new JButton("Alta");
-			btnNewButton_1.setBounds(155, 99, 192, 32);
-			contentPanel.add(btnNewButton_1);
+			btnAlta = new JButton("Alta");
+			btnAlta.setBounds(155, 99, 192, 32);
+			btnAlta.addActionListener(this);
+			contentPanel.add(btnAlta);
 		}
 		{
 			btnBaja = new JButton("Baja");
@@ -51,9 +58,10 @@ public class VAdministrador extends JDialog implements ActionListener {
 			contentPanel.add(btnBaja);
 		}
 		{
-			JButton btnNewButton_1 = new JButton("Cerrar Sesion");
-			btnNewButton_1.setBounds(155, 384, 192, 32);
-			contentPanel.add(btnNewButton_1);
+			btncerrarSesion = new JButton("Cerrar Sesion");
+			btncerrarSesion.setBounds(155, 384, 192, 32);
+			btncerrarSesion.addActionListener(this);
+			contentPanel.add(btncerrarSesion);
 		}
 		{
 			JLabel lblNewLabel = new JLabel("Gestion");
@@ -67,10 +75,30 @@ public class VAdministrador extends JDialog implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		if(e.getSource().equals(btnBaja)) {
+		if(e.getSource().equals(btnModificar)){
+			modificar();
+		}else if(e.getSource().equals(btnBaja)) {
 			baja();
+		}else if(e.getSource().equals(btncerrarSesion)){
+			cerrarSesion();
+		}else if(e.getSource().equals(btnAlta)){
+			alta();
 		}
+	}
+
+
+	private void alta() {
+		ConfirmarAlta conAl=new ConfirmarAlta(dao);
+		conAl.setVisible(true);
+		this.dispose();
+	}
+
+
+	private void modificar() {
+		ModificarPerfil modPer=new ModificarPerfil(dao);
+		modPer.setVisible(true);
+		this.dispose();
+				
 	}
 
 
@@ -78,6 +106,12 @@ public class VAdministrador extends JDialog implements ActionListener {
 		// TODO Auto-generated method stub
 		BajaUsuario bajaUsu=new BajaUsuario(dao);
 		bajaUsu.setVisible(true);
+		this.dispose();
+	}
+	
+	private void cerrarSesion() {
+		InicioSesion iniSe=new InicioSesion(dao);
+		iniSe.setVisible(true);
 		this.dispose();
 	}
 

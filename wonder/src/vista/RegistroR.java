@@ -21,6 +21,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -54,6 +55,7 @@ public class RegistroR extends JDialog implements ActionListener {
 	public RegistroR(Dao dao, Usuario usu) {
 		this.dao = dao;
 		this.usu=usu;
+		setIconImage(Toolkit.getDefaultToolkit().getImage(".\\.\\imagenes\\logo.png"));
 		setBounds(100, 100, 475, 539);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(new Color(238, 83, 130));
@@ -62,15 +64,9 @@ public class RegistroR extends JDialog implements ActionListener {
 		contentPanel.setLayout(null);
 		{
 			btnAceptar = new JButton("Aceptar");
-			btnAceptar.setBounds(320, 451, 129, 38);
+			btnAceptar.setBounds(167, 451, 129, 38);
 			btnAceptar.addActionListener(this);
 			contentPanel.add(btnAceptar);
-		}
-		{
-			btnVolver = new JButton("Volver");
-			
-			btnVolver.setBounds(10, 451, 129, 38);
-			contentPanel.add(btnVolver);
 		}
 		{
 			JLabel lblNewLabel_4 = new JLabel("Registro");
@@ -83,55 +79,60 @@ public class RegistroR extends JDialog implements ActionListener {
 		lblOrientacionSexual = new JLabel("Orientacion Sexual");
 		lblOrientacionSexual.setForeground(Color.WHITE);
 		lblOrientacionSexual.setFont(new Font("Tahoma", Font.BOLD, 17));
-		lblOrientacionSexual.setBounds(10, 128, 183, 21);
+		lblOrientacionSexual.setBounds(10, 65, 183, 21);
 		contentPanel.add(lblOrientacionSexual);
 
 		comboOrientacion = new JComboBox();
-		comboOrientacion.setModel(new DefaultComboBoxModel(new String[] { "Heterosexual", "Homosexual", "Transexual", "Pansexual", "Asexual", "Bisexual", "" }));
-		comboOrientacion.setBounds(10, 160, 183, 22);
+		comboOrientacion.setModel(new DefaultComboBoxModel(new String[] {"Heterosexual", "Homosexual"}));
+		comboOrientacion.setSelectedIndex(-1);
+		comboOrientacion.setBounds(10, 97, 183, 22);
 		contentPanel.add(comboOrientacion);
 		lblZodiaco = new JLabel("Zodiaco");
 		lblZodiaco.setForeground(Color.WHITE);
 		lblZodiaco.setFont(new Font("Tahoma", Font.BOLD, 17));
-		lblZodiaco.setBounds(10, 193, 86, 21);
+		lblZodiaco.setBounds(10, 130, 86, 21);
 		contentPanel.add(lblZodiaco);
 
 		lblGustos = new JLabel("Gustos");
 		lblGustos.setForeground(Color.WHITE);
 		lblGustos.setFont(new Font("Tahoma", Font.BOLD, 17));
-		lblGustos.setBounds(255, 193, 76, 21);
+		lblGustos.setBounds(255, 130, 76, 21);
 		contentPanel.add(lblGustos);
 
 		lblQueBuscas = new JLabel("Que buscas");
 		lblQueBuscas.setForeground(Color.WHITE);
 		lblQueBuscas.setFont(new Font("Tahoma", Font.BOLD, 17));
-		lblQueBuscas.setBounds(255, 128, 183, 21);
+		lblQueBuscas.setBounds(255, 65, 183, 21);
 		contentPanel.add(lblQueBuscas);
 
 		comboQueBuscas = new JComboBox();
 		comboQueBuscas.setModel(new DefaultComboBoxModel(new String[] {"Una Relacion", "Amistad"}));
-		comboQueBuscas.setBounds(255, 160, 183, 22);
+		comboQueBuscas.setSelectedIndex(-1);
+		comboQueBuscas.setBounds(255, 97, 183, 22);
 		contentPanel.add(comboQueBuscas);
 
 		comboGustos = new JComboBox();
 		comboGustos.setModel(new DefaultComboBoxModel(new String[] {"Videojuegos", "Fiesta", "Cine"}));
-		comboGustos.setBounds(255, 225, 183, 22);
+		comboGustos.setSelectedIndex(-1);
+		comboGustos.setBounds(255, 162, 183, 22);
 		contentPanel.add(comboGustos);
 
 		comboZodiaco = new JComboBox();
 		comboZodiaco.setModel(new DefaultComboBoxModel(new String[] { "Aries", "Tauro", "Geminis", "Cancer", "Leo",
 				"Virgo", "Libra", "Escorpio", "Sagitario", "Capricornio", "Acuario", "Piscis" }));
-		comboZodiaco.setBounds(10, 225, 183, 22);
+		comboZodiaco.setSelectedIndex(-1);
+		comboZodiaco.setBounds(10, 162, 183, 22);
 		contentPanel.add(comboZodiaco);
 
 		lblDescripcion = new JLabel("Descripcion");
 		lblDescripcion.setForeground(Color.WHITE);
 		lblDescripcion.setFont(new Font("Tahoma", Font.BOLD, 17));
-		lblDescripcion.setBounds(167, 258, 136, 21);
+		lblDescripcion.setBounds(167, 206, 136, 21);
 		contentPanel.add(lblDescripcion);
 
 		textField = new JTextField();
-		textField.setBounds(56, 290, 344, 150);
+		textField.setFont(new Font("Verdana", Font.PLAIN, 17));
+		textField.setBounds(55, 238, 344, 150);
 		contentPanel.add(textField);
 		textField.setColumns(10);
 		
@@ -169,7 +170,7 @@ public class RegistroR extends JDialog implements ActionListener {
 				rela.setGustos(comboGustos.getSelectedItem().toString());
 				rela.setQueBuscas(comboQueBuscas.getSelectedItem().toString());
 				rela.setDescripcion(textField.getText());
-				rela.setNomUsu(usu.getNomUsu());
+				rela.setNomUsuCli(usu.getNomUsu());
 				bd.insertarRelacion(rela);
 				InicioSesion re = new InicioSesion(dao);
 				re.setVisible(true);

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="vista.Modificar"/>
+    <fullyQualifiedTypeName name="clase.Usuario"/>
+    <fullyQualifiedTypeName name="modelo.DaoImplementacionBD"/>
+    <fullyQualifiedTypeName name="clase.Relacion"/>
+    <fullyQualifiedTypeName name="vista.InicioSesion"/>
+    <fullyQualifiedTypeName name="vista.ModificarPerfil"/>
+    <fullyQualifiedTypeName name="javax.swing.JScrollPane"/>
+    <fullyQualifiedTypeName name="javax.swing.table.DefaultTableModel"/>
+    <fullyQualifiedTypeName name="clase.Actividad"/>
+    <fullyQualifiedTypeName name="vista.VerActividad"/>
+    <fullyQualifiedTypeName name="clase.Cliente"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="modelo.Dao"/>
+    <fullyQualifiedTypeName name="javax.swing.JTable"/>
+    <fullyQualifiedTypeName name="java.awt.event.ActionListener"/>
+    <fullyQualifiedTypeName name="vista.ConfirmarAlta"/>
+    <fullyQualifiedTypeName name="com.toedter.calendar.JDateChooser"/>
+    <fullyQualifiedTypeName name="com.toedter.calendar.JCalendar"/>
+    <fullyQualifiedTypeName name="java.util.Date"/>
+    <fullyQualifiedTypeName name="java.time.LocalDate"/>
+    <fullyQualifiedTypeName name="java.time.format.DateTimeFormatter"/>
+    <fullyQualifiedTypeName name="java.time.Period"/>
+    <fullyQualifiedTypeName name="clase.Ubicacion"/>
+    <fullyQualifiedTypeName name="java.sql.Date"/>
+    <fullyQualifiedTypeName name="javax.swing.border.BevelBorder"/>
+    <fullyQualifiedTypeName name="javax.swing.border.MatteBorder"/>
+    <fullyQualifiedTypeName name="javax.swing.border.CompoundBorder"/>
+    <fullyQualifiedTypeName name="java.awt.Toolkit"/>
+    <fullyQualifiedTypeName name="javax.swing.ImageIcon"/>
+    <fullyQualifiedTypeName name="javax.swing.JSeparator"/>
+</qualifiedTypeNameHistroy>

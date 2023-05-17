@@ -6,8 +6,8 @@ public class Actividad {
 	private int codActividad;
 	private String nomActividad;
 	private String descripcion;
-	private LocalDate fecha;
-	private String nomUsu;
+	private String fecha;
+	private String nomUsuCli;
 	//
 	public Actividad() {
 		super();
@@ -32,16 +32,16 @@ public class Actividad {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-	public LocalDate getFecha() {
+	public String getFecha() {
 		return fecha;
 	}
-	public void setFecha(LocalDate fecha) {
+	public void setFecha(String fecha) {
 		this.fecha = fecha;
 	}
-	public String getNomUsu() {
-		return nomUsu;
+	public String getNomUsuCli() {
+		return nomUsuCli;
 	}
-	public void setNomUsu(String nomUsu) {
-		this.nomUsu = nomUsu;
+	public void setNomUsuCli(String nomUsuCli) {
+		this.nomUsuCli = nomUsuCli;
 	}
 }

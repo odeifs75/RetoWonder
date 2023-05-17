@@ -1,29 +1,51 @@
 package clase;
 
-public class Cliente extends Usuario{
+import java.time.LocalDate;
 
-	private String edad;
+
+/**
+ * @author june
+ * @author markel
+ * @author odei
+ * @author alvaro
+ */
+public class Cliente extends Usuario{
+	// ATRIBUTOS
+	private LocalDate fechaNac;
 	private String genero;
 
 
-	//
-	
+	// CONSTRUCTOR
+	/**
+	 * 
+	 */
 	public Cliente() {
-		super();
-	
-		
-		
+		super();	
 	}
-	
-	public String getEdad() {
-		return edad;
+
+	// GETTERS Y SETTER
+	/**
+	 * @return
+	 */
+	public LocalDate getFechaNac() {
+		return fechaNac;
 	}
-	public void setEdad(String edad) {
-		this.edad = edad;
+	/**
+	 * @param fechaNac
+	 */
+	public void setFechaNac(LocalDate fechaNac) {
+		this.fechaNac = fechaNac;
 	}
+
+	/**
+	 * @return
+	 */
 	public String getGenero() {
 		return genero;
 	}
+	/**
+	 * @param genero
+	 */
 	public void setGenero(String genero) {
 		this.genero = genero;
 	}

@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.text.ZoneView;
 
 import clase.Relacion;
 import clase.Usuario;
@@ -21,19 +22,23 @@ import javax.swing.JTextField;
 import javax.swing.JTable;
 import javax.swing.ImageIcon;
 import java.awt.Font;
+import java.awt.Toolkit;
+
 import javax.swing.JTextPane;
 import javax.swing.JToggleButton;
 import javax.swing.JEditorPane;
+import javax.swing.UIManager;
+import javax.swing.border.CompoundBorder;
 
 public class VCliente extends JDialog implements ActionListener {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField textNomUsu;
-	private JButton btnNewButton;
+	private JButton btnlupa;
 	private JButton btnCerrar;
 	private JButton btnmodificar;
-	private JButton btnNewButton_3;
-	private JButton btnNewButton_4;
+	private JButton btnActividad;
+	private JButton btnusu;
 	private JLabel lblOrientacio;
 	private JLabel lblZodiaco;
 	private JLabel lblGustos;
@@ -47,15 +52,17 @@ public class VCliente extends JDialog implements ActionListener {
 	private JTextField textDescrip;
 	private JButton btnrefresh;
 	private Usuario usu;
-	
+	private JButton btnmensaje;
 
 	/**
 	 * Create the dialog.
-	 * @param usu 
+	 * 
+	 * @param usu
 	 */
 	public VCliente(Dao dao, Usuario usu) {
 		this.dao=dao;
 		this.usu = usu;
+		setIconImage(Toolkit.getDefaultToolkit().getImage(".\\.\\imagenes\\logo.png"));
 		setBounds(100, 100, 480, 573);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(new Color(238, 83, 130));
@@ -64,21 +71,28 @@ public class VCliente extends JDialog implements ActionListener {
 		contentPanel.setLayout(null);
 		{
 			textNomUsu = new JTextField();
-			textNomUsu.setBounds(135, 28, 159, 30);
+			textNomUsu.setEditable(false);
+			textNomUsu.setBorder(null);
+			textNomUsu.setFont(new Font("Tahoma", Font.BOLD, 21));
+			textNomUsu.setForeground(Color.WHITE);
+			textNomUsu.setBackground(new Color(238, 83, 130));
+			textNomUsu.setBounds(172, 29, 135, 30);
 			contentPanel.add(textNomUsu);
 			textNomUsu.setColumns(10);
 		}
 		
-		btnNewButton = new JButton("New button");
-		btnNewButton.setForeground(new Color(238, 83, 130));
-		btnNewButton.setBackground(new Color(238, 83, 130));
-		btnNewButton.setIcon(new ImageIcon("C:\\Users\\1dam\\Downloads\\lupa-removebg-preview.png"));
-		btnNewButton.setBounds(0, 481, 65, 53);
-		btnNewButton.addActionListener(this);
-		contentPanel.add(btnNewButton);
+		btnlupa = new JButton("");
+		btnlupa.setBorder(null);
+		btnlupa.setForeground(new Color(238, 83, 130));
+		btnlupa.setBackground(new Color(238, 83, 130));
+		btnlupa.setIcon(new ImageIcon(".\\.\\imagenes\\lupa.png"));
+		btnlupa.setBounds(0, 481, 65, 53);
+		btnlupa.addActionListener(this);
+		contentPanel.add(btnlupa);
 		
 		btnCerrar = new JButton("Cerrar Sesion");
 		btnCerrar.setBounds(59, 415, 113, 40);
+		btnCerrar.addActionListener(this);
 		contentPanel.add(btnCerrar);
 		
 		btnmodificar = new JButton("Modificar Perfil");
@@ -86,19 +100,23 @@ public class VCliente extends JDialog implements ActionListener {
 		
 		contentPanel.add(btnmodificar);
 		
-		btnNewButton_3 = new JButton("");
-		btnNewButton_3.setIcon(new ImageIcon("C:\\Users\\1dam\\Downloads\\email-removebg-preview.png"));
-		btnNewButton_3.setForeground(new Color(238, 83, 130));
-		btnNewButton_3.setBackground(new Color(238, 83, 130));
-		btnNewButton_3.setBounds(175, 481, 77, 53);
-		contentPanel.add(btnNewButton_3);
+		btnActividad = new JButton("");
+		btnActividad.setBorder(null);
+		btnActividad.setIcon(new ImageIcon(".\\.\\imagenes\\actividad.png"));
+		btnActividad.setForeground(new Color(238, 83, 130));
+		btnActividad.setBackground(new Color(238, 83, 130));
+		btnActividad.setBounds(107, 481, 65, 53);
+		btnActividad.addActionListener(this);
+		contentPanel.add(btnActividad);
 		
-		btnNewButton_4 = new JButton("");
-		btnNewButton_4.setIcon(new ImageIcon("C:\\Users\\1dam\\Downloads\\png-clipart-computer-icons-user-profile-circle-abstract-miscellaneous-rim-removebg-preview.png"));
-		btnNewButton_4.setForeground(new Color(238, 83, 130));
-		btnNewButton_4.setBackground(new Color(238, 83, 130));
-		btnNewButton_4.setBounds(387, 469, 77, 65);
-		contentPanel.add(btnNewButton_4);
+		btnusu = new JButton("");
+		btnusu.setBorder(null);
+		btnusu.setEnabled(false);
+		btnusu.setIcon(new ImageIcon(".\\.\\imagenes\\usu.png"));
+		btnusu.setForeground(new Color(238, 83, 130));
+		btnusu.setBackground(new Color(238, 83, 130));
+		btnusu.setBounds(387, 469, 77, 65);
+		contentPanel.add(btnusu);
 		
 		lblOrientacio = new JLabel("Orientacion sexual:");
 		lblOrientacio.setForeground(Color.WHITE);
@@ -117,7 +135,7 @@ public class VCliente extends JDialog implements ActionListener {
 		lblGustos = new JLabel("Gustos:");
 		lblGustos.setForeground(Color.WHITE);
 		lblGustos.setFont(new Font("Tahoma", Font.BOLD, 17));
-		lblGustos.setBackground(Color.WHITE);
+		lblGustos.setBackground(new Color(238, 83, 130));
 		lblGustos.setBounds(20, 182, 136, 30);
 		contentPanel.add(lblGustos);
 		
@@ -129,21 +147,41 @@ public class VCliente extends JDialog implements ActionListener {
 		contentPanel.add(lblQueBuscas);
 		
 		textOrientacion = new JTextField();
+		textOrientacion.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		textOrientacion.setEditable(false);
+		textOrientacion.setForeground(Color.WHITE);
+		textOrientacion.setBorder(null);
+		textOrientacion.setBackground(new Color(238, 83, 130));
 		textOrientacion.setColumns(10);
 		textOrientacion.setBounds(193, 103, 200, 20);
 		contentPanel.add(textOrientacion);
 		
 		textZodiaco = new JTextField();
+		textZodiaco.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		textZodiaco.setEditable(false);
+		textZodiaco.setBorder(null);
+		textZodiaco.setForeground(Color.WHITE);
+		textZodiaco.setBackground(new Color(238, 83, 130));
 		textZodiaco.setColumns(10);
 		textZodiaco.setBounds(107, 144, 200, 20);
 		contentPanel.add(textZodiaco);
 		
 		textGustos = new JTextField();
+		textGustos.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		textGustos.setEditable(false);
+		textGustos.setBorder(null);
+		textGustos.setForeground(Color.WHITE);
+		textGustos.setBackground(new Color(238, 83, 130));
 		textGustos.setColumns(10);
 		textGustos.setBounds(107, 190, 200, 20);
 		contentPanel.add(textGustos);
 		
 		textBusca = new JTextField();
+		textBusca.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		textBusca.setEditable(false);
+		textBusca.setBorder(null);
+		textBusca.setForeground(Color.WHITE);
+		textBusca.setBackground(new Color(238, 83, 130));
 		textBusca.setColumns(10);
 		textBusca.setBounds(135, 242, 200, 20);
 		contentPanel.add(textBusca);
@@ -156,41 +194,69 @@ public class VCliente extends JDialog implements ActionListener {
 		contentPanel.add(lblDescrip);
 		
 		textDescrip = new JTextField();
+		textDescrip.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		textDescrip.setEditable(false);
+		textDescrip.setBorder(null);
+		textDescrip.setForeground(Color.WHITE);
+		textDescrip.setBackground(new Color(238, 83, 130));
 		textDescrip.setColumns(10);
-		textDescrip.setBounds(166, 273, 200, 79);
+		textDescrip.setBounds(135, 298, 319, 30);
 		contentPanel.add(textDescrip);
+		
+		btnmensaje = new JButton("");
+		btnmensaje.setBorder(null);
+		btnmensaje.setIcon(new ImageIcon(".\\.\\imagenes\\carta.png"));
+		btnmensaje.setForeground(new Color(238, 83, 130));
+		btnmensaje.setBackground(new Color(238, 83, 130));
+		btnmensaje.setBounds(251, 481, 77, 53);
+		btnmensaje.addActionListener(this);
+		contentPanel.add(btnmensaje);
 		cargar();
-	
+
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
-		if(e.getSource().equals(btnCerrar)) {
+
+		if (e.getSource().equals(btnCerrar)) {
 			cerrarSesion();
+		} else if (e.getSource().equals(btnActividad)) {
+			actividades();
 		}
+	}
+
+	private void actividades() {
+		// TODO Auto-generated method stub
+		VActividad acti = new VActividad(dao, usu);
+		acti.setVisible(true);
+		this.dispose();
 	}
 
 	private void cerrarSesion() {
 		// TODO Auto-generated method stub
-		Inicio ini=new Inicio(dao);
+		Inicio ini = new Inicio(dao);
 		ini.setVisible(true);
 		this.dispose();
 	}
 
 	public void cargar() {
-		
+
 		DaoImplementacionBD bd = new DaoImplementacionBD();
-		Relacion rela =	bd.cargarDatos(usu.getNomUsu());
-		
-		textNomUsu.setText(rela.getNomUsu());
+		/*
+		 * Al principio de esta clase llamamos a la clase Usuario en la cual hemos
+		 * guardado los datos que han introducido en el login, le pasamos por parametro
+		 * el metodo en el que conseguimos el nombre de usuario (En el
+		 * DaoImplementaciones explico porque)
+		 */
+		// En el objeto rela le pasamos los datos del metodo
+		Relacion rela = bd.cargarDatos(usu.getNomUsu());
+		// Cogemos los datos del DAOImplementaciones
+		textNomUsu.setText(rela.getNomUsuCli());
 		textOrientacion.setText(rela.getOrienSex());
 		textZodiaco.setText(rela.getZodiaco());
 		textGustos.setText(rela.getGustos());
 		textBusca.setText(rela.getQueBuscas());
 		textDescrip.setText(rela.getDescripcion());
-		
+
 	}
-	
-	//COMENTARIO DE PRUEBA SSH
-	}
+}
