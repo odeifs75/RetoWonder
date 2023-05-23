@@ -1,51 +1,113 @@
 package clase;
 
 import java.time.LocalDate;
+import java.util.Date;
 
+import javax.swing.JTextField;
+
+/**
+ * @author june
+ * @author markel
+ * @author odei
+ * @author alvaro
+ */
 public class Actividad {
+	// ATRIBUTOS
 	private int codActividad;
 	private String nomActividad;
 	private String descripcion;
-	private LocalDate fecha;
-	private String nomUsu;
-	//
-	public Actividad(int codActividad, String nomActividad, String descripcion, LocalDate fecha, String nomUsu) {
+	private String fecha;
+	private int cantPerIns;
+	private String nomUsuCli;
+
+	// CONSTRUCTOR
+	public Actividad() {
 		super();
-		this.codActividad = codActividad;
-		this.nomActividad = nomActividad;
-		this.descripcion = descripcion;
-		this.fecha = fecha;
-		this.nomUsu = nomUsu;
 	}
-	//
+
+	// GETTERS Y SETTER
+	/**
+	 * @return
+	 */
 	public int getCodActividad() {
 		return codActividad;
 	}
+
+	/**
+	 * @param codActividad
+	 */
 	public void setCodActividad(int codActividad) {
 		this.codActividad = codActividad;
 	}
+
+	/**
+	 * @return
+	 */
 	public String getNomActividad() {
 		return nomActividad;
 	}
+
+	/**
+	 * @param nomActividad
+	 */
 	public void setNomActividad(String nomActividad) {
 		this.nomActividad = nomActividad;
 	}
+
+	/**
+	 * @return
+	 */
 	public String getDescripcion() {
 		return descripcion;
 	}
+
+	/**
+	 * @param descripcion
+	 */
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-	public LocalDate getFecha() {
+
+	/**
+	 * @return
+	 */
+	public String getFecha() {
 		return fecha;
 	}
-	public void setFecha(LocalDate fecha) {
+
+	/**
+	 * @param fecha
+	 */
+	public void setFecha(String fecha) {
 		this.fecha = fecha;
 	}
-	public String getNomUsu() {
-		return nomUsu;
+
+	/**
+	 * @return
+	 */
+	public int getCantPerIns() {
+		return cantPerIns;
 	}
-	public void setNomUsu(String nomUsu) {
-		this.nomUsu = nomUsu;
+
+	/**
+	 * @param cantPerIns
+	 */
+	public void setCantPerIns(int cantPerIns) {
+		this.cantPerIns = cantPerIns;
 	}
+
+	/**
+	 * @return
+	 */
+	public String getNomUsuCli() {
+		return nomUsuCli;
+	}
+
+	/**
+	 * @param nomUsuCli
+	 */
+	public void setNomUsuCli(String nomUsuCli) {
+		this.nomUsuCli = nomUsuCli;
+	}
+
 }

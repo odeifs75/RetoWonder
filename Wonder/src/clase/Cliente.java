@@ -1,33 +1,51 @@
 package clase;
 
-public class Cliente extends Usuario{
-	private String nomUsu;
-	private String email;
-	private String contrasena;
-	//
-	public Cliente(String nomUsu, String email, String contrasena, String nomUsu2, String email2, String contrasena2) {
-		super(nomUsu, email, contrasena);
-		nomUsu = nomUsu2;
-		email = email2;
-		contrasena = contrasena2;
+import java.time.LocalDate;
+import java.util.Date;
+import java.text.SimpleDateFormat;
+
+/**
+ * @author june
+ * @author markel
+ * @author odei
+ * @author alvaro
+ */
+public class Cliente extends Usuario {
+	// ATRIBUTOS
+	private LocalDate fechaNac;
+	private String genero;
+
+	// CONSTRUCTOR
+	public Cliente() {
+		super();
 	}
-	//
-	public String getNomUsu() {
-		return nomUsu;
+
+	// GETTERS Y SETTER
+	/**
+	 * @return
+	 */
+	public LocalDate getFechaNac() {
+		return fechaNac;
 	}
-	public void setNomUsu(String nomUsu) {
-		this.nomUsu = nomUsu;
+
+	/**
+	 * @param fechaNac
+	 */
+	public void setFechaNac(LocalDate fechaNac) {
+		this.fechaNac = fechaNac;
 	}
-	public String getEmail() {
-		return email;
+
+	/**
+	 * @return
+	 */
+	public String getGenero() {
+		return genero;
 	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	public String getContrasena() {
-		return contrasena;
-	}
-	public void setContrasena(String contrasena) {
-		this.contrasena = contrasena;
+
+	/**
+	 * @param genero
+	 */
+	public void setGenero(String genero) {
+		this.genero = genero;
 	}
 }
